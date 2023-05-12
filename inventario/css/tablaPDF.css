@@ -1,0 +1,25 @@
+h1 {
+    text-align: center;
+}
+
+td, th {
+    padding: 10px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: white;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(69, 69, 255);
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(140, 140, 255);
+    color: white;
+}
+
+thead tr {
+    background-color: green;
+}

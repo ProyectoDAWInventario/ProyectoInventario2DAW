@@ -1,0 +1,141 @@
+  body {
+    background: url('../images/fondo.png');
+    font-family: Arial, sans-serif;
+    color: black;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-box, .register-box {
+    width: 350px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    animation-name: con1;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes con1{
+    0%{
+      scale: 0;
+    }
+    100%{
+      scale: 1;
+    }
+  }
+  
+
+  
+  .login-box h2, .register-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"], input[type="email"], input[type="password"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+    background-color: #f2f2f2;
+  }
+  
+  input[type="submit"] {
+    background-color: rgb(68, 68, 90) !important;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease 0s;
+  }
+
+  #register-btn, #close-btn{
+    background-color: #2a1f68;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 10px;
+    width: 350px;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #227196 !important; 
+    box-shadow: 0px 15px 20px rgba(30, 119, 83, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+
+  input[type="submit"]:active{
+    transform: translateY(-1px);
+  }
+  
+  #register-box {
+    display: none;
+  }
+
+  /* Estilos del select */
+.selectPersonal select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Estilos del contenedor */
+.selectPersonal {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Estilos del borde inferior */
+.selectPersonal::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #333;
+  pointer-events: none;
+}
+
+/* Estilos del icono */
+.selectPersonal::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #333;
+  pointer-events: none;
+}
+
+/* Estilos del select cuando se abre */
+.selectPersonal select:focus {
+  outline: none;
+}
+
+  
