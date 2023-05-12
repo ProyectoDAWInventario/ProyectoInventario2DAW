@@ -1,117 +1,164 @@
 html{
-    box-sizing: border-box;
-    font-size: 62.5%;
+  box-sizing: border-box;
+  font-size: 62.5%;
 }
 
 *, *:before, *:after{
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body{
-    font-family: 'PT Sans', sans-serif;
-    font-size: 1.6rem;
-    line-height: 2;
-    color: white;
-    /* fallback for old browsers */
-    background: #6a11cb;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1.6rem;
+  line-height: 2;
+  color: white;
+  /* fallback for old browsers */
+  background: #6a11cb;
 
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
 
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
 }
 
 
 .header{
-    text-align: center;
-    background-color: 	#343a40;
-    margin: 0 auto;
+  text-align: center;
+  background-color: 	#343a40;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .contenedor{
-    width: min(90%, 120rem);
-    margin: 0 auto;
+  width: min(90%, 120rem);
+  margin: 0 auto;
+  padding: 0;
 }
 
 .titulo{
-    margin: 0 auto;
-    line-height: 2;
-    font-size: 4.8rem;
+  margin: 0 auto;
+  line-height: 2;
+  font-size: 4.8rem;
 }
 
 /* .cuerpo{
-    margin-top: 15rem;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px; 
+  margin-top: 15rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; 
 } */
 
+section{
+display: grid;
+margin-top: 20rem;
+gap: 20px;
+grid-template-columns: 300px 300px 300px 300px;
+justify-content: center;
+width: auto;
+}
+
+a{
+position: relative;
+width: 250px;
+transition: all .3s ease;
+cursor: pointer;
+color: white !important;
+text-decoration: none !important;
+display: block;
+}
+
+a img:first-child{
+box-shadow: 0 60px 60px -60px rgba(0, 30, 255, 0.5);
+border-radius: 4px;
+object-fit: cover;
+width: 100%;
+}
+
+a img:last-child{
+position: absolute;
+width: 200px;
+bottom: 0;
+left: 0;
+right: 0;
+margin: auto;
+transform: translateY(20%);
+transition: .3s ease;
+opacity: 0;
+}
+
+a:hover{
+transform: perspective(250px) rotateX(10deg) translateY(-5%) translateZ(0);
+}
+
+a::before{
+content: '';
+position: absolute;
+bottom: 0;
+height: 100%;
+width: 100%;
+background-image: linear-gradient(
+  to bottom,
+  transparent 10%,
+  rgba(0,0,0,0.5) 60%,
+  rgba(0,0,0) 97%
+);
+opacity: 0;
+transition: all .3s ease;
+}
+
+a:hover::before{
+opacity: 1;
+}
+
+a:hover img:last-child{
+opacity: 1;
+transform: translateY(20%);
+}
+
+/* ACTUALIZACIÓN */
+
+@media (max-width: 1023px) {
+section {
+  display: grid;
+  margin-top: 20rem;
+  gap: 20px;
+  justify-content: center;
+  justify-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  width: auto;
+}
+
+a {
+  width: 250px; 
+  margin: 0 auto 20px; 
+}
+
+a img:last-child {
+  width: 150px;
+}
+}
+
+@media(max-width: 768px){
 section{
   display: grid;
   margin-top: 20rem;
   gap: 20px;
-  grid-template-columns: 300px 300px 300px 300px;
   justify-content: center;
+  justify-items: center;
+  grid-template-columns: 1fr; 
   width: auto;
 }
 
 a{
-  position: relative;
-  width: 250px;
-  transition: all .3s ease;
-  cursor: pointer;
-  color: white !important;
-  text-decoration: none !important;
-}
-
-a img:first-child{
-  box-shadow: 0 60px 60px -60px rgba(0, 30, 255, 0.5);
-  border-radius: 4px;
-  object-fit: cover;
-  width: 100%;
+  width: 250px; 
 }
 
 a img:last-child{
-  position: absolute;
-  width: 200px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  transform: translateY(20%);
-  transition: .3s ease;
-  opacity: 0;
+  width: 150px;
+}
 }
 
-a:hover{
-  transform: perspective(250px) rotateX(10deg) translateY(-5%) translateZ(0);
-}
-
-a::before{
-  content: '';
-  position: absolute;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  background-image: linear-gradient(
-    to bottom,
-    transparent 10%,
-    rgba(0,0,0,0.5) 60%,
-    rgba(0,0,0) 97%
-  );
-  opacity: 0;
-  transition: all .3s ease;
-}
-
-a:hover::before{
-  opacity: 1;
-}
-
-a:hover img:last-child{
-  opacity: 1;
-  transform: translateY(20%);
-}
 
 
