@@ -1,5 +1,6 @@
 <?php
 
+// INSTALAR composer require mdpf/mdpf
 require_once('../../vendor/autoload.php');
 require_once('../../archivosComunes/conexion.php');
 
@@ -27,10 +28,25 @@ $mpdf->WriteHTML('<table>
                     </thead>
                     <tbody>');
 
-    $sql = "SELECT * FROM articulo;";
+    $mes_Actual = date('m');
+    $año_Actual = date('Y');
+
+    if($mes_Actual >= 9 && $mes_Actual <= 12){
+        $fecha_inicio = $año_Actual.'-09-01';
+        $fecha_fin = ($año_Actual+1).'-08-31';
+    } else if ($mes_Actual <= 8 && $mes_Actual > 0){
+        $fecha_inicio = ($año_Actual-1).'-09-01';
+        $fecha_fin = $año_Actual.'-08-31';
+    }
+    
+    // consulta principal
+    $consulta = 'SELECT * FROM articulo WHERE fecha_alta BETWEEN ? AND ?';
+
+    
+    // $sql = "SELECT * FROM articulo;";
     //Preparo la consulta
-    $preparada = $db->prepare($sql);
-    $preparada->execute();
+    $preparada = $db->prepare($consulta);
+    $preparada->execute(array($fecha_inicio, $fecha_fin));
     $resultados = $preparada->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($resultados as $row){
@@ -48,6 +64,7 @@ $mpdf->WriteHTML('<table>
     }
 $mpdf->WriteHTML('</tbody>
                 </table>');
+$mpdf->WriteHTML('fecha inicio: '.$fecha_inicio.'fecha fin: '.$fecha_fin);
 // PRIMER PARAMETRO: nombre que se dara al fichero al darle a guardar por defecto
 // SEGUNDO PARAMETRO: accion que realiza al pulsar el boton
 //      - I -> abre el pdf en otra pestaña con la opcion de descargarlo
