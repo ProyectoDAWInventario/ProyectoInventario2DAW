@@ -42,8 +42,19 @@ $mpdf->WriteHTML('<table>
     // consulta principal
     $consulta = 'SELECT * FROM articulo WHERE fecha_alta BETWEEN ? AND ?';
 
-    
-    // $sql = "SELECT * FROM articulo;";
+    /*
+    CONSULTA PARA MOSTRAR LOS ARTICULOS POR DEPARTAMENTO AL ADMIN
+    select a.CODIGO, d.NOMBRE, a.FECHA_ALTA, a.NUM_SERIE, a.NOMBRE, a.DESCRIPCION, a.UNIDADES, a.LOCALIZACION, a.PROCEDENCIA_ENTRADA, a.MOTIVO_BAJA
+    from departamento d, articulo a, tiene t, NoFungible nf where d.CODIGO = t.COD_DEPARTAMENTO and t.COD_ARTICULO = a.CODIGO and a.CODIGO = nf.CODIGO;
+    */
+
+    /*
+    CONSULTA PARA MOSTRAR LOS ARTICULOS DEL DEPARTAMENTO A PROFESORES
+    select a.CODIGO, d.NOMBRE, a.FECHA_ALTA, a.NUM_SERIE, a.NOMBRE, a.DESCRIPCION, a.UNIDADES, a.LOCALIZACION, a.PROCEDENCIA_ENTRADA, a.MOTIVO_BAJA 
+    from usuario u, departamento d, articulo a, tiene t, noFungible nf
+    where u.DEPARTAMENTO = d.CODIGO and d.CODIGO = t.COD_DEPARTAMENTO and t.COD_ARTICULO = a.CODIGO and a.CODIGO = nf.CODIGO and u.ROL = '1';
+    */
+
     //Preparo la consulta
     $preparada = $db->prepare($consulta);
     $preparada->execute(array($fecha_inicio, $fecha_fin));

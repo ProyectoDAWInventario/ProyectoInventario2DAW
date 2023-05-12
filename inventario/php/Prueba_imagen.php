@@ -104,7 +104,7 @@
                 <td>". $row["MOTIVO_BAJA"] ."</td>
                 <td>". $row["FECHA_BAJA"] ."</td>";
                 echo '<td><a href="editarMaterial.php?cod='.$row["CODIGO"].'" class="text-decoration-none p-1"><i class="bi bi-pencil-square"></i></a></td>
-                <td><a href="borrarMaterial.php?cod='.$row["CODIGO"].'" class="text-decoration-none p-1"><i class="bi bi-trash3"></i></a></td>
+                <td><a href="confirmarDelete.php?cod='.$row["CODIGO"].'" class="text-decoration-none p-1"><i class="bi bi-trash3"></i></a></td>
                 </tr>';
             }
             return TRUE;

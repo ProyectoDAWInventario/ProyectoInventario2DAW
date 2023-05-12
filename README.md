@@ -13,3 +13,6 @@
  10. Cambiar diseño y consulta al pasar los articulos a pdf.
  11. Cambiar lo que ve cada usuario en la lista
 adios
+
+## MODIFICACIONES DANIEL
+* El confirmar borrar de un material ya funciona y faltaría darle estilos.
