@@ -2,6 +2,7 @@
 <?php
 
 class MaterialInstituto {
+    private $departamento;
     private $codigo;
     private $fechaAlta;
     private $isbn;
@@ -15,6 +16,24 @@ class MaterialInstituto {
 
     // Falta imagen.
     function __construct(){}
+
+    /**
+     * Get the value of departamento
+     */
+    public function getDepartamento()
+    {
+        return $this->departamento;
+    }
+
+    /**
+     * Set the value of departamento
+     */
+    public function setDepartamento($departamento): self
+    {
+        $this->departamento = $departamento;
+
+        return $this;
+    }
 
     /**
      * Get the value of codigo

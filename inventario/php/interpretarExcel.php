@@ -96,6 +96,9 @@ function interpretarExcel($inputFileName) {
                         $columnId = $cell->getColumn();
                         //Si la columna es la C; definimos el valor codigo de nuestro objeto. (En todas las C estan
                         //los codigos del objeto)
+                        if($columnId == "A") {
+                            $material->setDepartamento($cellValue);
+                        }
                         if ($columnId == "C") {
                             $material->setCodigo($cellValue);
                         }

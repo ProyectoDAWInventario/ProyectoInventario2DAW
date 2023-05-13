@@ -73,7 +73,37 @@
 			</ul>
 		</nav>
 	</header>
-	
+	<!-- FILTROS -->
+	<div>
+		<form method="post" action="cookieFiltro.php">
+			<fieldset name="filtro" id="filtro">
+				<input type="radio" name="filtro" value="todos">TODOS
+				<input type="radio" name="filtro" value="fungibles">FUNGIBLES
+				<input type="radio" name="filtro" value="nofungibles">NO FUNGIBLES
+			</fieldset>
+			<input type="submit" value="Aceptar">
+		</form>
+		<br>
+		<?php
+			session_start();
+			if($_SESSION['usuario_login']['ROL'] == 0){
+		?>
+		<select class="form-control" id="filtro_departamento" name="filtro_departamento">
+			<option>Todos</option>
+			<?php 
+				require_once('../../archivosComunes/conexion.php');
+				$consulta = "SELECT * FROM departamento";
+				$consulta = $db->query($consulta);
+				foreach ($consulta as $row) {
+					echo '<option>'.$row['NOMBRE'].'</option>';
+				}
+			?>
+		</select><br>
+		<?php } ?>
+		<input type="search" name="filtro_año" id="filtro_año">
+
+	</div>
+
 	<!-- <button type="button" class="btn btn-warning"><a href="exportarPDF.php" target="_blank">Descargar PDF</a></button> -->
 	<div class="container-fluid" style="padding-bottom: 150px;" id="tablaArticulos">
 		<div class="table-responsive ">
@@ -99,10 +129,19 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tbodyy">
 					<?php
 					require_once "./Prueba_imagen.php";
-					consultarDatos();
+					// consultarDatos('SELECT * FROM articulo;');
+					if(!isset($_GET['filtro'])){
+						consultarDatos('SELECT * FROM articulo;');
+					} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'todos'){
+						consultarDatos('SELECT * FROM articulo;');
+					} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'fungibles') {
+						consultarDatos('SELECT a.* from ARTICULO a, FUNGIBLE f where a.CODIGO = f.CODIGO;');
+					} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'nofungibles') {
+						consultarDatos('SELECT a.* from ARTICULO a, NOFUNGIBLE f where a.CODIGO = f.CODIGO;');
+					}
 					?>
 				</tbody>
 			</table>

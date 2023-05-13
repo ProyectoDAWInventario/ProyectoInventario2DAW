@@ -5,7 +5,12 @@
         require_once('../../archivosComunes/conexion.php');
         require_once('../../archivosComunes/loginRequerido.php');
         if(isset($_POST["btn-guardar"])){
-            $nombreDepartamento = $_POST['selectDepartamento'];
+            if($_SESSION["usuario_login"]['ROL'] == 1){
+                $nombreDepartamento = $_POST['nombreDepartamento'];
+            } else {
+                $nombreDepartamento = $_POST['selectDepartamento'];
+            }
+
             if($nombreDepartamento == '- Seleccione su departamento -'){
                 header("Location: formulario.php?error=true");
             } else {
@@ -39,6 +44,7 @@
                     $consulta = "INSERT INTO tiene(COD_ARTICULO,COD_DEPARTAMENTO) VALUES (?,?);";
                     $consulta = $db->prepare($consulta);
                     $consulta->execute(array($codArticulo, $codigoDepartamento));
+                    header("Location: lista.php");
                 } else {                    
                         $consulta = "SELECT * FROM departamento WHERE NOMBRE = ?;";
                         $consulta = $db->prepare($consulta);

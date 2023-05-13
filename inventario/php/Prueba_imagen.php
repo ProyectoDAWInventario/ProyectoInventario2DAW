@@ -59,13 +59,13 @@
         $updateQuery->execute();
     }
 
-    function consultarDatos(){
+    function consultarDatos($consulta){
         require "./conexion.php";
         try {
             $db = new PDO($conexion, $usuario, $contrasena);
-            $sql = "SELECT * FROM articulo;";
+            // $sql = "SELECT * FROM articulo;";
             //Preparo la consulta
-            $preparada = $db->prepare($sql);
+            $preparada = $db->prepare($consulta);
             $preparada->execute();
 
             /*Utilizamos el método fetchAll() para obtener todos los

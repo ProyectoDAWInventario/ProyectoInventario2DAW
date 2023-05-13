@@ -156,7 +156,7 @@ require_once('conexion.php');
                                         </div>
                                         
                                         <?php
-                                            require_once('conexion.php');
+                                            require_once('../../archivosComunes/conexion.php');
                                             if($_SESSION["usuario_login"]["ROL"] != 0){
                                                 $departamento = $_SESSION["usuario_login"]["DEPARTAMENTO"];
                                                 $consulta = "SELECT * FROM departamento WHERE codigo = ?";
@@ -167,10 +167,13 @@ require_once('conexion.php');
                                                 print "<script>
                                                     document.getElementById('selectDepartamento').disabled = true;
                                                 </script>";
+                                                
                                             }
-
                                             
+                                            if($_SESSION['usuario_login']['ROL'] == 1){
                                         ?>
+                                            <input type="hidden" name="nombreDepartamento" id="nombreDepartamento" value="<?php echo $dpto_usuario?>">
+                                        <?php } ?>
                                         <script>
                                             let selector = document.getElementById('selectDepartamento');
                                             for(let i = 0; i < selector.length; i++){

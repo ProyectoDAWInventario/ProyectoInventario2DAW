@@ -17,6 +17,7 @@
             //En cada una de estas llamadas se invoca al getter para pasar un atributo a una variable.En
             //el caso de las fechas;hay que pasarlas a formato año/mes/dia.
             $fechaAlta = $material->getFechaAlta()->format('Y/m/d');
+            $añoAlta = substr($fechaAlta, 0, 4);
             $isbn = $material->getIsbn();
             $nombre = $material->getNombre();
             $descripcion =  $material->getDescripcion();
@@ -24,6 +25,7 @@
             $localizacion =  $material->getLocalizacion();
             $procedencia = $material->getProcedencia();
             $motivoBaja = $material->getMotivoBaja();
+            $departamento = $material->getDepartamento();
             //En el caso de que la fecha sea nula debemos indicar que la fecha es nula.
             //si fuera nula y accedieramos a ella nos daría un error; puesto que no podríamos formatearla.
             if ($material->getFechaBaja() == null) {
@@ -46,6 +48,29 @@
             $datos->bindParam(9, $fechaBaja);
 
             $datos->execute();
+
+            // INSERT EN LA TABLA TIENE
+            $consultaArticulo = "SELECT MAX(CODIGO) as id FROM articulo";
+            $consultaArticulo = $db->query($consultaArticulo);
+            $codigoArticulo = $consultaArticulo->fetch();
+            $codArticulo = $codigoArticulo['id'];
+
+            $consultaDepartamento = "SELECT * FROM departamento WHERE REFERENCIA = ?";
+            $consultaDepartamento = $db->prepare($consultaDepartamento);
+            $consultaDepartamento->bindParam(1, $departamento);
+            $consultaDepartamento->execute();
+            $codigoDepartamento = $consultaDepartamento->fetch();
+            $codDepartamento = $codigoDepartamento['codigo'];
+
+            $consulta = "INSERT INTO tiene(COD_ARTICULO,COD_DEPARTAMENTO) VALUES (?,?);";
+            $consulta = $db->prepare($consulta);
+            $consulta->bindParam(1, $codArticulo);
+            $consulta->bindParam(2, $codDepartamento);
+            $consulta->execute();
+
+            $consultaNoFungibles = "INSERT INTO nofungible(CODIGO, FECHA) VALUES (?,?);";
+            $consultaNoFungibles = $db->prepare($consultaNoFungibles);
+            $consultaNoFungibles->execute(array($codArticulo, $añoAlta));
             $db = null;
             return true;
         } catch (PDOException $e) {
