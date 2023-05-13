@@ -8,6 +8,11 @@
  9. Los articulos fungibles tienen que tener la opcion de pedirse o no y cuando queden pocos (5 articulos) mandar correo al administrador.
  10. Cambiar diseño y consulta al pasar los articulos a pdf.
  11. Cambiar lo que ve cada usuario en la lista
+ 12. Filtros:
+  - Radio: todos, fungibles y no fungibles
+  - Departamentos solo para admin
+  - Año
+  - Borrar Filtros
 
 ## MODIFICACIONES DANIEL
 * El confirmar borrar de un material ya funciona y faltaría darle estilos.
