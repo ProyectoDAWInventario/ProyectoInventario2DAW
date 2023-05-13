@@ -1,7 +1,5 @@
 ﻿# ProyectoInventario2DAW
  ### Tareas Pendientes
-
- 3. Al borrar artículo, saltar un confirm para confirmar que lo va a borrar.
  4. Buscador y paginación en la lista de artículos.
  5. Corregir diseño en editarMaterial.php y en cargarExcel.php
  6. Testear el proyecto entero probando funciones y todo tipo de posibilidades para ver posibles errores o cambios.
