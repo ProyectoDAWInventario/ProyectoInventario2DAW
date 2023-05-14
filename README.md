@@ -13,6 +13,10 @@
  10. Cambiar diseño y consulta al pasar los articulos a pdf.
  11. Cambiar lo que ve cada usuario en la lista
 adios
+12. Añadir un filtro para:
+  - Mostrar articulos por departamento.
+  - Mostrar artículos por año.
+  - Mostrar artículos por fungible o no fungible.
 
 ## MODIFICACIONES DANIEL
 * El confirmar borrar de un material ya funciona y faltaría darle estilos.
