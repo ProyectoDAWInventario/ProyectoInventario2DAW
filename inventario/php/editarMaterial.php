@@ -73,6 +73,20 @@ foreach ($articulos as $articulo) {
             align-items: center;
             height: 100vh;
         }
+        footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 20px;
+  background-color: #f8f9fa;
+}
+
+@media screen and (max-width: 768px) {
+			.texto-footer {
+				font-size: 14px;
+			}
+		}
     </style>
 </head>
 <body>
@@ -91,7 +105,7 @@ foreach ($articulos as $articulo) {
         </ul> 
     </nav>
 </header> 
-	<div class="container">
+	<div class="container-fluid mt-4">
 		<form action="actualizar.php?cod=<?php echo $codigo ?>" method="POST" enctype="multipart/form-data">
 			<div class="col-12">
                 <div class="row datos">
@@ -140,22 +154,20 @@ foreach ($articulos as $articulo) {
                         </div>  
                     </div>
                     <div class="col-12 p-5 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary shadow " style="margin-right: 50px;" name="Aceptar" value="Aceptar">Guardar</button>
-                        <a href="lista.php" id="btn-salir" type="button" class="btn btn-primary shadow">Volver</a>
+                        <button type="submit" class="btn gradient-custom shadow me-4" style="color: white" style="margin-right: 50px;" name="Aceptar" value="Aceptar">Guardar</button>
+                        <a href="lista.php" id="btn-salir" type="button" class="btn gradient-custom shadow ms-4" style="color: white">Volver</a>
                     </div>
                 </div>
             </div>
 		</form>
 	</div>
-    <footer class="gradient-custom">
-		<nav class="navbar navbar-expand-md navbar-light text-light p-4 d-flex justify-content-between">
-			<div>Brenda</div>
-			<div>Daniel</div>
-			<div>Javier</div>
-			<div>Nerea</div>
-			<div>Raul</div>
+    <footer class=" gradient-custom p-3 ">
+		<nav class="navbar navbar-expand-md navbar-light text-light d-flex
+					justify-content-center mt-0">
+			<div class="texto-footer" style="text-align:center;">IES JULIO VERNE
+				Curso(2022-2023)<br> Creado por Brenda, Daniel, Javier, Nerea y Raúl
+				&#169;</div>
 		</nav>
-
 	</footer>
 	<script src="../js/bootstrap.bundle.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

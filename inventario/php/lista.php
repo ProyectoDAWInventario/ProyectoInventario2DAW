@@ -44,6 +44,19 @@
 			font-size: 20px;
 		}
 
+		ul{
+			list-style: none;
+		}
+
+		input#aplicar_filtros{
+			margin-left: 30px;
+		}
+
+		fieldset{
+			margin-top: 20px;
+			font-weight: bold;
+		}
+
 		@media screen and (max-width: 768px) {
 			.texto-footer {
 				font-size: 16px;
@@ -52,36 +65,51 @@
 			/* .texto-table {
 				font-size: 16px;
 			} */
-		}
+		}		
 	</style>
 </head>
 
 <body>
 
-	<header class="gradient-custom">
-		<nav class="navbar navbar-expand-md navbar-light p-3 ms-4 me-4">
-			<a class="navbar-brand text-light " href="../index.html">Inventario</a>
-			<ul class="navbar-nav flex-row flex-wrap text-light ms-auto">
-				<li class="nav-item dropdown">
-					<i id="iniciar_sesion" class="bi bi-person nav-link dropdown text-light" role="button" data-bs-toggle="dropdown" style="text-align: right;"> Mi cuenta</i>
+<header class="gradient-custom">
+	<nav class="navbar navbar-expand-md navbar-light p-3 ms-4 me-4">
+		<a class="navbar-brand text-light" href="../index.html">Inventario</a>
+		<form class="d-flex justify-content-center flex-grow-1 w-25">
+			<input class="form-control me-2 w-25" type="search" placeholder="Buscar" aria-label="Buscar">
+			<button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+		</form>
+		<ul class="navbar-nav flex-row flex-wrap text-light ms-auto">
+			<li class="nav-item dropdown">
+				<i id="iniciar_sesion" class="bi bi-person nav-link dropdown text-light" role="button" data-bs-toggle="dropdown" style="text-align: right;"> Mi cuenta</i>
 
-					<ul class="dropdown-menu dropdown-menu-end">
-						<a class="dropdown-item" href="../../archivosComunes/adminUsuario.php">Gestionar cuenta</a>
-						<a class="dropdown-item" href="../../archivosComunes/logout.php">Cerrar sesión</a>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-	</header>
+				<ul class="dropdown-menu dropdown-menu-end">
+					<a class="dropdown-item" href="../../archivosComunes/adminUsuario.php">Gestionar cuenta</a>
+					<a class="dropdown-item" href="../../archivosComunes/logout.php">Cerrar sesión</a>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</header>
+
+
 	<!-- FILTROS -->
 	<div>
 		<form method="post" action="cookieFiltro.php">
 			<fieldset name="filtro" id="filtro">
-				<input type="radio" name="filtro" value="todos">TODOS
-				<input type="radio" name="filtro" value="fungibles">FUNGIBLES
-				<input type="radio" name="filtro" value="nofungibles">NO FUNGIBLES
+				<ul>
+					<li>
+						<input type="radio" name="filtro" value="todos"> TODOS
+					</li>
+					<li>
+						<input type="radio" name="filtro" value="fungibles"> FUNGIBLES
+					</li>
+					<li>
+						<input type="radio" name="filtro" value="nofungibles"> NO FUNGIBLES
+					</li>
+				</ul>
+				
+				<input class="btn gradient-custom shadow" style="color: white" id="aplicar_filtros" type="submit" value="Aplicar filtro">
 			</fieldset>
-			<input type="submit" value="Aceptar">
 		</form>
 		<br>
 		<?php
@@ -100,7 +128,7 @@
 			?>
 		</select><br>
 		<?php } ?>
-		<input type="search" name="filtro_año" id="filtro_año">
+		
 
 	</div>
 

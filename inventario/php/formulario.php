@@ -15,7 +15,7 @@ require_once('conexion.php');
 	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	
-	<link rel="stylesheet" type="text/css" href="../inventario/css/index.css">
+	<!-- <link rel="stylesheet" type="text/css" href="../inventario/css/index.css"> -->
 	<style>
 		.row{
             padding: 15px;
@@ -61,12 +61,15 @@ require_once('conexion.php');
   position: relative;
   box-sizing: border-box;
 }
-        footer {
-  position: absolute;
+footer {
+  position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
   font-size: 20px;
+  background-color: #f8f9fa;
 }
+
 @media screen and (max-width: 768px) {
 			.texto-footer {
 				font-size: 14px;
@@ -234,11 +237,17 @@ require_once('conexion.php');
                 </div>
             </form>
 
-        <footer class=" gradient-custom p-3 ">
-            <nav class="navbar navbar-expand-md navbar-light text-light d-flex justify-content-center mt-0">
-                <div class="texto-footer" style="text-align:center;">IES JULIO VERNE Curso(2022-2023)<br> Creado por Brenda, Daniel, Javier, Nerea y Raúl  &#169;</div>
-            </nav>
-        </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+            <footer class=" gradient-custom p-3 ">
+                <nav class="navbar navbar-expand-md navbar-light text-light d-flex
+                            justify-content-center mt-0">
+                    <div class="texto-footer" style="text-align:center;">IES JULIO VERNE
+                        Curso(2022-2023)<br> Creado por Brenda, Daniel, Javier, Nerea y Raúl
+                        &#169;</div>
+                </nav>
+            </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+		crossorigin="anonymous">
+	    </script>
     </body>    
 </html>
