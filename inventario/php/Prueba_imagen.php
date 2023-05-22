@@ -103,9 +103,62 @@
                 <td>". $row["PROCEDENCIA_ENTRADA"] ."</td>
                 <td>". $row["MOTIVO_BAJA"] ."</td>
                 <td>". $row["FECHA_BAJA"] ."</td>";
-                echo '<td><a href="editarMaterial.php?cod='.$row["CODIGO"].'" class="text-decoration-none p-1"><i class="bi bi-pencil-square"></i></a></td>
-                <td><a href="confirmarDelete.php?cod='.$row["CODIGO"].'" class="text-decoration-none p-1"><i class="bi bi-trash3"></i></a></td>
-                </tr>';
+                echo '<td>
+                        <a href="editarMaterial.php?cod='.$row["CODIGO"].'" class="text-decoration-none p-1"><i class="bi bi-pencil-square"></i></a>
+                    </td>
+                    <td>
+                        <a href="confirmarDelete.php?cod='.$row["CODIGO"].'" class="text-decoration-none p-1"><i class="bi bi-trash3"></i></a>
+                    </td>';
+                    // FUNCIÓN PARA PONER ICONO DE PEDIR O NO PEDIR
+                    // SOLO PARA ARTICULOS FUNGIBLES
+                    $consulta = "SELECT articulo.CODIGO FROM articulo INNER JOIN fungible WHERE articulo.CODIGO = fungible.CODIGO;";
+                    $consulta = $db->query($consulta);
+                    foreach ($consulta as $row01) {
+                        if($row01['CODIGO'] == $row['CODIGO']) {
+                            // CONSULTA PARA SABER SI EN LA BASE DE DATOS ESTA PEDIR A SI O PEDIR A NO
+                            $consulta = "SELECT * FROM fungible WHERE CODIGO = ?";
+                            $consulta = $db->prepare($consulta);
+                            $consulta->execute(array($row01['CODIGO']));
+                            foreach ($consulta as $key) {
+                                $pedir = $key['PEDIR'];
+                            }
+                            // SI EN LA BASE DE DATOS SE ENCUENTRA EN NO SE PONDRA EL ICONO DE NO PEDIDO
+                            if($pedir == 'no') {
+                                echo '<td>
+                                    <a href="pedirArticulo.php?cod='.$row01['CODIGO'].'" class="text-decoration-none p-1" style="margin-left: 0px; color: blue;" id="nopedido" name="nopedido"><i class="bi bi-cart-dash"></i></a>
+                                    <a href="pedirArticulo.php?cod='.$row01['CODIGO'].'" class="text-decoration-none p-1" style="margin-left: 0px; color: blue; display: none;" id="pedido" name="pedido"><i class="bi bi-cart-check"></i></a>';
+                                echo '</td>'; 
+                            // SI EN LA BASE DE DATOS SE ENCUENTRA EN SI SE PONDRA EL ICONO DE PEDIDO
+                            } else if ($pedir == 'si') {
+                                echo '<td>
+                                    <a href="pedirArticulo.php?cod='.$row01['CODIGO'].'" class="text-decoration-none p-1" style="margin-left: 0px; color: blue; display: none;" id="nopedido" name="nopedido"><i class="bi bi-cart-dash"></i></a>
+                                    <a href="pedirArticulo.php?cod='.$row01['CODIGO'].'" class="text-decoration-none p-1" style="margin-left: 0px; color: blue; " id="pedido" name="pedido"><i class="bi bi-cart-check"></i></a>';
+                                echo '</td>'; 
+                            }
+                            
+                        }
+                    }
+
+                    // SI SE ENCUENTRA INICIALIZADO A TRAVES DEL METODO GET 'PEDIR' Y A LA VEZ ES IGUAL A NO
+                    // EL ICONO DE NO PEDIDO DESAPARECE Y EL DE PEDIDO APARECE
+                    if(isset($_GET['pedir']) && $_GET['pedir'] == 'no') {
+                    ?>
+                        <script type='text/javascript'> 
+                            document.getElementById('nopedido').style.display = 'none';
+                            document.getElementById('pedido').style.display = 'block';
+                        </script>
+                    <?php
+                    // SI SE ENCUENTRA INICIALIZADO A TRAVES DEL METODO GET 'PEDIR' Y A LA VEZ ES IGUAL A SI
+                    // EL ICONO DE NO PEDIDO APARECE Y EL DE PEDIDO DESAPARECE
+                    } else if (isset($_GET['pedir']) && $_GET['pedir'] == 'si') {
+                    ?>
+                        <script type='text/javascript'> 
+                            document.getElementById('nopedido').style.display = 'block';
+                            document.getElementById('pedido').style.display = 'none';
+                        </script>
+                    <?php
+                    }
+                echo '</tr>';
             }
             return TRUE;
         } catch (PDOException $e) {

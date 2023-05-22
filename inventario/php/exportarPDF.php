@@ -41,7 +41,12 @@ $mpdf->WriteHTML('<table>
     
     // consulta principal
     // $consulta = 'SELECT * FROM articulo WHERE fecha_alta BETWEEN ? AND ?';
-    $consulta = 'select a.CODIGO, d.NOMBRE, a.FECHA_ALTA, a.NUM_SERIE, a.NOMBRE, a.DESCRIPCION, a.UNIDADES, a.LOCALIZACION, a.PROCEDENCIA_ENTRADA, a.MOTIVO_BAJA, a.FECHA_BAJA from departamento d, articulo a, tiene t, NoFungible nf where d.CODIGO = t.COD_DEPARTAMENTO and t.COD_ARTICULO = a.CODIGO and a.CODIGO = nf.CODIGO AND a.fecha_alta BETWEEN ? AND ?;';
+    $consulta = 'SELECT a.CODIGO, d.NOMBRE, a.FECHA_ALTA, a.NUM_SERIE, a.NOMBRE, a.DESCRIPCION, a.UNIDADES, a.LOCALIZACION, a.PROCEDENCIA_ENTRADA, a.MOTIVO_BAJA, a.FECHA_BAJA 
+    FROM departamento d, articulo a, tiene t, NoFungible nf 
+    WHERE d.CODIGO = t.COD_DEPARTAMENTO 
+    AND t.COD_ARTICULO = a.CODIGO 
+    AND a.CODIGO = nf.CODIGO 
+    AND a.fecha_alta BETWEEN ? AND ?;';
 
     /*
     CONSULTA PARA MOSTRAR LOS ARTICULOS POR DEPARTAMENTO AL ADMIN
