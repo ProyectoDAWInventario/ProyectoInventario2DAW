@@ -130,6 +130,11 @@
 				?>
 			</select>
 			<input type="submit" value="Filtrar">
+			<?php
+				if(isset($_GET['codigo'])){
+			?>
+			<input type="hidden" name="filtro_dpto" id="filtro_dpto" value="<?php echo $_GET['codigo'] ?>">
+			<?php } ?>
 		</form><br>
 		<?php } ?>		
 
@@ -153,10 +158,23 @@
 						<th scope="col">Motivo baja</th>
 						<th scope="col">Fecha baja</th>
 						<th scope="col">
-							<a href="exportarPDF.php" target="_blank">
+							<?php
+								if($_SESSION['usuario_login']['ROL'] == 0){
+							?>
+							<a href='exportarPDF.php?codDepartamento=<?php if(isset($_GET['codigo'])){echo $_GET['codigo']; } else { echo "todos"; } ?>' target="_blank">
 								<!-- <i class="bi bi-box-arrow-in-down"></i> -->
 								<i class="bi bi-filetype-pdf"></i>
 							</a>
+							<?php 
+								} else if($_SESSION['usuario_login']['ROL'] == 1){
+							?>
+							<a href='exportarPDF.php' target="_blank">
+								<!-- <i class="bi bi-box-arrow-in-down"></i> -->
+								<i class="bi bi-filetype-pdf"></i>
+							</a>
+							<?php 
+								} 
+							?>
 						</th>
 					</tr>
 				</thead>
