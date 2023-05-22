@@ -5,6 +5,7 @@ use ProyectoDAW;
 -- TABLA DEPARTAMENTO
 create table Departamento (
 codigo smallint primary key auto_increment,
+REFERENCIA varchar(4),
 NOMBRE varchar(100)  not null,
 JEFE varchar(50),
 UBICACION varchar(5)
@@ -181,53 +182,53 @@ insert into Usuario(DNI,NOMBRE, APELLIDOS, EMAIL, CLAVE, ROL, VALIDAR)
 values('11111111A', 'administrador', 'administrador', 'incidencias@iesbargas.com','AppIncidencias',0,'si');
 
 -- Valores de las tabla Departamentos
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Francés', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('FRA', 'DPTO Francés', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Inglés', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('ING', 'DPTO Inglés', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Tecnología', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('TEC', 'DPTO Tecnología', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Religión', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('REL', 'DPTO Religión', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Matemáticas', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('MAT', 'DPTO Matemáticas', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Educación Física', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('EF', 'DPTO Educación Física', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Dibujo', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('DIB', 'DPTO Dibujo', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Informática', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('INF', 'DPTO Informática', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Lengua', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('LEN', 'DPTO Lengua', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Filosofía', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('FIL', 'DPTO Filosofía', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Geografía e Historia', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('GEH', 'DPTO Geografía e Historia', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Orientación', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('ORI', 'DPTO Orientación', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Física y Química', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('FYQ', 'DPTO Física y Química', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Música', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('MUS', 'DPTO Música', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Biología y Geología', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('BIO', 'DPTO Biología y Geología', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Griego', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('GRI', 'DPTO Griego', 'x', 'xxx');
 
-insert into Departamento(NOMBRE, JEFE, UBICACION)
-values('DPTO Economía', 'x', 'xxx');
+insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)
+values('ECO', 'DPTO Economía', 'x', 'xxx');
