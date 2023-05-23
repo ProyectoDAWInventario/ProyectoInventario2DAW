@@ -5,6 +5,7 @@
 3. TODOS: Testear el proyecto entero probando funciones y todo tipo de posibilidades para ver posibles errores o cambios.
 4. FILTROS:
   - NEREA: Mostrar articulos por pedidos o no 
+  - TODOS: Poder seleccionar varios filtros a la vez
 5. TODOS: PONER EL LOGIN REQUERIDO A TODOS LOS FICHEROS (../../archivosComunes/loginrequerido.php)
 6. NEREA: Cuando el administrador añade un artículo debe seleccionar el departamento, pero si se le olvida seleccionarlo,
 aparece un mensaje diciendo que debe rellenar ese campo, pero todos los demás campos se borran.
