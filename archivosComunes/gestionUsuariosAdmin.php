@@ -129,9 +129,9 @@ if ($_SESSION['usuario_login']['ROL'] != 0) {
               <td>
                 <input type='hidden' name='idUsuario' value='$Cod_Usuario'>
                 <input type='hidden' name='rolUsuario' value='$rol'>
-                <button class='btn btn-secondary' name='autorizar'>Autorizar</button> 
-                <button class='btn btn-danger' name='denegar'>Denegar</button>
-                <button class='btn btn-success' name='efectuar' >Efectuar Administrador</button>
+                <button class='btn btn-secondary m-1' name='autorizar'>Autorizar</button> 
+                <button class='btn btn-danger m-1' name='denegar'>Denegar</button>
+                <button class='btn btn-success m-1' name='efectuar' >Efectuar Administrador</button>
               </td>
           </tr>
           </tbody>

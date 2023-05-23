@@ -78,27 +78,28 @@ require_once('loginRequerido.php');
     </header>
     <!-- TODOS LOS USUARIOS -->
     <?php
-      if($_SESSION['usuario_login']['ROL'] == 0){
+if ($_SESSION['usuario_login']['ROL'] == 0) {
 
-        require_once('conexion.php');
-        $contador = 0;
-        try {
-          // Mostramos los usuarios que no estan autorizados en la app
-          $usuarios = 'SELECT * FROM Usuario';
-          $usuarios = $db->query($usuarios);
-          echo ('<div class="container-fluid">');
-          echo ('<table class="table text-light">');
-          echo ("<thead>
+    require_once('conexion.php');
+    $contador = 0;
+    try {
+        // Mostramos los usuarios que no están autorizados en la app
+        $usuarios = 'SELECT * FROM Usuario';
+        $usuarios = $db->query($usuarios);
+        echo ('<div class="container-fluid">');
+        echo ('<div class="table-responsive">');
+        echo ('<table class="table text-light p-4 m-4">');
+        echo ("<thead>
               <tr>
                 <th scope='col'>#</th>
-                <td>Nombre</td>
-                <td>Apellidos</td>
-                <td>Email</td>
-                <td>Acción</td>
+                <th scope='col'>Nombre</th>
+                <th scope='col'>Apellidos</th>
+                <th scope='col'>Email</th>
+                <th scope='col'>Acción</th>
               </tr>
             </thead>");
 
-          foreach ($usuarios as $row) {
+        foreach ($usuarios as $row) {
             $Cod_Usuario = $row['COD_USUARIO'];
             $rol = $row['ROL'];
             $nombre = $row['NOMBRE'];
@@ -118,22 +119,21 @@ require_once('loginRequerido.php');
                     <td>
                       <input type='hidden' name='idUsuario' value='$Cod_Usuario'>
                       <input type='hidden' name='rolUsuario' value='$rol'> 
-                      <button class='btn btn-secondary' name='editar'>Editar</button>
-                      <a href='borrarUsuario.php?cod=$Cod_Usuario' class='btn btn-danger' name='eliminar' id='eliminar'>Eliminar</a>
+                      <button class='btn btn-secondary m-1' name='editar'>Editar</button>
+                      <a href='borrarUsuario.php?cod=$Cod_Usuario' class='btn btn-danger m-1' name='eliminar' id='eliminar'>Eliminar</a>
                     </td>
                 </tr>
                 </tbody>
                 </form>";
-          }
-          echo "</table></div>";
-        } catch (PDOException $e) {
-          echo 'Error con la base de datos ' . $e->getMessage();
-      }
-
-      } else {
-        header ("Location: actualizarUsuario.php?idusuario=".$_SESSION['usuario_login']['COD_USUARIO']."");
-      }
-    ?>
+        }
+        echo "</table></div></div>";
+    } catch (PDOException $e) {
+        echo 'Error con la base de datos ' . $e->getMessage();
+    }
+} else {
+    header("Location: actualizarUsuario.php?idusuario=" . $_SESSION['usuario_login']['COD_USUARIO'] . "");
+}
+?>
     <!-- FIN TODOS LOS USUARIOS -->
 
     <script src="../js/bootstrap.bundle.min.js"></script>
