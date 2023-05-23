@@ -1,21 +1,22 @@
 ﻿# ProyectoInventario2DAW
  ### Tareas Pendientes
-1. Buscador y paginación en la lista de artículos.
-2. Corregir diseño en editarMaterial.php y en cargarExcel.php
-3. Testear el proyecto entero probando funciones y todo tipo de posibilidades para ver posibles errores o cambios.
-4. En la lista de los articulos tener dos filtros: por departamento, por año y sacar fungibles y no fungibles REVISAR
-5. Los articulos fungibles tienen que tener la opcion de pedirse o no. DISEÑO PUESTO QUEDA FUNCIONALIDAD
-6. Cambiar diseño y consulta al pasar los articulos a pdf. REVISAR
-7. Cambiar lo que ve cada usuario en la lista REVISAR
-8. Añadir un filtro para:
-  - Mostrar articulos por departamento.
-  - Mostrar artículos por fungible o no fungible. HECHO
-  - Mostrar articulos por pedidos o no
-
-9. PONER EL LOGIN REQUERIDO A TODOS LOS FICHEROS (../../archivosComunes/loginrequerido.php)
-10. Cuando el administrador añade un artículo debe seleccionar el departamento, pero si se le olvida seleccionarlo,
+1. DANIEL Y RAUL: Buscador y paginación en la lista de artículos.
+2. RAUL: Corregir diseño de algunas páginas.
+3. TODOS: Testear el proyecto entero probando funciones y todo tipo de posibilidades para ver posibles errores o cambios.
+4. FILTROS:
+  - NEREA: Mostrar articulos por pedidos o no 
+  - TODOS: En el filtro de fungible y no fungible si no se selecciona nada y se da a aplicar filtro coge todos.
+5. TODOS: PONER EL LOGIN REQUERIDO A TODOS LOS FICHEROS (../../archivosComunes/loginrequerido.php)
+6. TODOS: Cuando el administrador añade un artículo debe seleccionar el departamento, pero si se le olvida seleccionarlo,
 aparece un mensaje diciendo que debe rellenar ese campo, pero todos los demás campos se borran.
-11. En el filtro de fungible y no fungible si no se selecciona nada y se da a aplicar filtro coge no fungible.
+7. RAUL: cuando no se encuentren resultados poner mensaje de que no encuentra nada
+
+ ### REVISAR
+1. TODOS: Los articulos fungibles tienen que tener la opcion de pedirse o no. REVISAR
+2. TODOS: Revisar consultas al pasar los articulos a pdf. REVISAR
+3. TODOS: Cambiar lo que ve cada usuario en la lista REVISAR
+4. FILTROS:
+  - Mostrar articulos por departamento. HECHO Y REVISAR
 
 ## MODIFICACIONES DANIEL
 * El confirmar borrar de un material ya funciona y faltaría darle estilos.
@@ -23,6 +24,8 @@ aparece un mensaje diciendo que debe rellenar ese campo, pero todos los demás c
 ## MODIFICACIONES NEREA
 * Consultas al mostrar los datos en la lista para el usuario de profesor
 * Puesto el checkbox solo para articulos fungibles
+* Modificacion en cookie filtro porque cuando le dabas al boton sin seleccionar nada te llevaba al else que eran los no fungibles.
 
 ## MODIFICACIONES JAVI
 * Implementación del filtro de departamento para el admin
+* Cambio del titulo en los pdf
