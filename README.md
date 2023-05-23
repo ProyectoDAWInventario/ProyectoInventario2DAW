@@ -13,6 +13,8 @@
   - Mostrar articulos por pedidos o no
 
 9. PONER EL LOGIN REQUERIDO A TODOS LOS FICHEROS (../../archivosComunes/loginrequerido.php)
+10. Cuando el administrador añade un artículo debe seleccionar el departamento, pero si se le olvida seleccionarlo,
+aparece un mensaje diciendo que debe rellenar ese campo, pero todos los demás campos se borran.
 
 ## MODIFICACIONES DANIEL
 * El confirmar borrar de un material ya funciona y faltaría darle estilos.
