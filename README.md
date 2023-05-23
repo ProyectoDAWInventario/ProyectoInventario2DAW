@@ -25,6 +25,7 @@ aparece un mensaje diciendo que debe rellenar ese campo, pero todos los demás c
 * Consultas al mostrar los datos en la lista para el usuario de profesor
 * Puesto el checkbox solo para articulos fungibles
 * Modificacion en cookie filtro porque cuando le dabas al boton sin seleccionar nada te llevaba al else que eran los no fungibles.
+* Dejar seleccionado el input tipo radio de fungibles y no fungibles segun el que sea
 
 ## MODIFICACIONES JAVI
 * Implementación del filtro de departamento para el admin
