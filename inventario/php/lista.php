@@ -98,17 +98,17 @@
 			<fieldset name="filtro" id="filtro">
 				<ul>
 					<li>
-						<input type="radio" name="filtro" value="todos"> TODOS
+						<input type="radio" name="filtro" value="todos" <?php if(!isset($_GET['filtro']) || (isset($_GET['filtro']) && $_GET['filtro'] == "todos")) echo 'checked'; ?>> TODOS
 					</li>
 					<li>
-						<input type="radio" name="filtro" value="fungibles"> FUNGIBLES
+						<input type="radio" name="filtro" value="fungibles" <?php if(isset($_GET['filtro']) && $_GET['filtro'] == "fungibles") echo 'checked'; ?>> FUNGIBLES
 					</li>
 					<li>
-						<input type="radio" name="filtro" value="nofungibles"> NO FUNGIBLES
+						<input type="radio" name="filtro" value="nofungibles" <?php if(isset($_GET['filtro']) && $_GET['filtro'] == "nofungibles") echo 'checked'; ?>> NO FUNGIBLES
 					</li>
 				</ul>
 				
-				<input class="btn gradient-custom shadow" style="color: white" id="aplicar_filtros" type="submit" value="Aplicar filtro">
+				<input class="btn gradient-custom shadow" style="color: white" name="aplicar_filtros" id="aplicar_filtros" type="submit" value="Aplicar filtro">
 			</fieldset>
 		</form>
 		<br>

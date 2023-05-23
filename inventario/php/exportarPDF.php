@@ -10,8 +10,48 @@ $mpdf = new \Mpdf\Mpdf(['orientation' => 'L']);
 $stylesheet = file_get_contents('../css/tablaPDF.css');
 // Insertamos la linea de css en nuestro PDF
 $mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+if($_SESSION['usuario_login']['ROL'] == 0){
+// Obtenemos el nombre del departamento
+$departamento = '';
+if (isset($_GET['codDepartamento']) && $_GET['codDepartamento'] !== "todos") {
+    $codDepartamento = $_GET['codDepartamento'];
+    $query = 'SELECT NOMBRE FROM departamento WHERE CODIGO = ?';
+    $pre = $db->prepare($query);
+    $pre->execute([$codDepartamento]);
+    $departamento = $pre->fetchColumn();
+}
 
-$mpdf->WriteHTML('<h1>ARTICULOS NO FUNGIBLES</h1>');
+$titulo = 'ARTICULOS NO FUNGIBLES';
+if (!empty($departamento)) {
+    $titulo .= ' DEL ' . $departamento;
+}
+$titulo = 'ARTICULOS NO FUNGIBLES';
+}
+else if($_SESSION['usuario_login']['ROL'] == 1) {
+    $titulo = 'ARTICULOS NO FUNGIBLES';
+    $codigoDepartamento = $_SESSION['usuario_login']['DEPARTAMENTO'];
+    $query = 'SELECT NOMBRE FROM departamento WHERE CODIGO = ?';
+    $pre = $db->prepare($query);
+    $pre->execute([$codigoDepartamento]);
+    $departamento = $pre->fetchColumn();
+} else {
+    $titulo = 'ARTICULOS NO FUNGIBLES';
+    $departamento = '';
+    if (isset($_GET['codDepartamento']) && $_GET['codDepartamento'] !== "todos") {
+        $codDepartamento = $_GET['codDepartamento'];
+        $query = 'SELECT NOMBRE FROM departamento WHERE CODIGO = ?';
+        $pre = $db->prepare($query);
+        $pre->execute([$codDepartamento]);
+        $departamento = $pre->fetchColumn();
+    }
+}
+
+if (!empty($departamento)) {
+    $titulo .= ' DEL ' .  mb_strtoupper($departamento);
+}
+
+$mpdf->WriteHTML('<h1>' . $titulo . '</h1>');
+
 $mpdf->WriteHTML('<table>
                     <thead>
                         <tr>
