@@ -7,10 +7,10 @@
  9. Los articulos fungibles tienen que tener la opcion de pedirse o no. DISEÑO PUESTO QUEDA FUNCIONALIDAD
  10. Cambiar diseño y consulta al pasar los articulos a pdf. REVISAR
  11. Cambiar lo que ve cada usuario en la lista REVISAR
-adios
 12. Añadir un filtro para:
   - Mostrar articulos por departamento.
   - Mostrar artículos por fungible o no fungible. HECHO
+  - Mostrar articulos por pedidos o no
 
 ## MODIFICACIONES DANIEL
 * El confirmar borrar de un material ya funciona y faltaría darle estilos.
