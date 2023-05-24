@@ -66,6 +66,13 @@
 				font-size: 16px;
 			} */
 		}		
+
+		.block-27 li span:hover, .block-27 li a:hover {
+			background-image: linear-gradient(to right, rgba(106, 17, 203, 1) 0%, rgba(37, 117, 252, 1) 100%);
+			box-shadow: 0 .5rem 1rem rgba(0, 123, 255, .2);
+			color: white;
+			transition: 0.3s linear;
+		}
 	</style>
 </head>
 
@@ -74,9 +81,9 @@
 <header class="gradient-custom">
 	<nav class="navbar navbar-expand-md navbar-light p-3 ms-4 me-4">
 		<a class="navbar-brand text-light" href="../index.html">Inventario</a>
-		<form class="d-flex justify-content-center flex-grow-1 w-25">
-			<input class="form-control me-2 w-25" type="search" placeholder="Buscar" aria-label="Buscar">
-			<button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+		<form class="d-flex justify-content-center flex-grow-1 w-25" method="POST" action="buscar.php">
+			<input class="form-control me-2 w-25" type="search" id="buscar" name="buscar" placeholder="Buscar" aria-label="Buscar">
+			<button class="btn btn-outline-light" type="submit" id="boton_buscar" name="boton_buscar"><i class="bi bi-search"></i></button>
 		</form>
 		<ul class="navbar-nav flex-row flex-wrap text-light ms-auto">
 			<li class="nav-item dropdown">
@@ -182,7 +189,7 @@
 					<?php
 					require_once "./Prueba_imagen.php";
 					// consultarDatos('SELECT * FROM articulo;');
-					
+					$pagina = isset($_GET['page'])?$_GET['page']:0;
 					if($_SESSION['usuario_login']['ROL'] == 0){
 						// if(!isset($_GET['filtro'])){
 						// 	consultarDatos('SELECT * FROM articulo;');
@@ -198,31 +205,125 @@
 							consultarDatos('SELECT a.* FROM articulo a
 											INNER JOIN tiene t ON a.CODIGO = t.COD_ARTICULO
 											INNER JOIN departamento d ON t.COD_DEPARTAMENTO = d.codigo
-											WHERE d.codigo = '.$codigo_departamento.';');
+											WHERE d.codigo = '.$codigo_departamento.'', $pagina
+											);
 						} else if (isset($_GET['filtro']) && $_GET['filtro'] == 'todos') {
-							consultarDatos('SELECT * FROM articulo;');
+							consultarDatos('SELECT * FROM articulo',$pagina);
 						} else if (isset($_GET['filtro']) && $_GET['filtro'] == 'fungibles') {
-							consultarDatos('SELECT a.* FROM ARTICULO a, FUNGIBLE f WHERE a.CODIGO = f.CODIGO;');
+							consultarDatos('SELECT a.* FROM ARTICULO a, FUNGIBLE f WHERE a.CODIGO = f.CODIGO',
+						$pagina
+
+						);
 						} else if (isset($_GET['filtro']) && $_GET['filtro'] == 'nofungibles') {
-							consultarDatos('SELECT a.* FROM ARTICULO a, NOFUNGIBLE f WHERE a.CODIGO = f.CODIGO;');
-						} else {
-							consultarDatos('SELECT * FROM articulo;');
+							consultarDatos('SELECT a.* FROM ARTICULO a, NOFUNGIBLE f WHERE a.CODIGO = f.CODIGO',
+							$pagina );
+						} 
+						else {
+							consultarDatos('SELECT * FROM articulo',$pagina);
 						}
 					} else if($_SESSION['usuario_login']['ROL'] == 1) {
 						// consultarDatos('SELECT * FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'].';');
 						if(!isset($_GET['filtro'])){
-							consultarDatos('SELECT * FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'].';');
+							consultarDatos('SELECT * FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],
+						
+					 $pagina
+						
+						);
 						} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'todos'){
-							consultarDatos('SELECT * FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'].';');
+							consultarDatos('SELECT * FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],
+						
+				$pagina
+						
+						);
 						} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'fungibles') {
-							consultarDatos('SELECT * FROM articulo INNER JOIN tiene ON ARTICULO.CODIGO = TIENE.COD_ARTICULO INNER JOIN fungible ON articulo.CODIGO = fungible.CODIGO WHERE tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'].';');
+							consultarDatos('SELECT * FROM articulo INNER JOIN tiene ON ARTICULO.CODIGO = TIENE.COD_ARTICULO INNER JOIN fungible ON articulo.CODIGO = fungible.CODIGO WHERE tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],
+						
+							$pagina);
+
 						} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'nofungibles') {
-							consultarDatos('SELECT * FROM articulo INNER JOIN tiene ON ARTICULO.CODIGO = TIENE.COD_ARTICULO INNER JOIN nofungible ON articulo.CODIGO = nofungible.CODIGO WHERE tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'].';');
+							consultarDatos('SELECT * FROM articulo INNER JOIN tiene ON ARTICULO.CODIGO = TIENE.COD_ARTICULO INNER JOIN nofungible ON articulo.CODIGO = nofungible.CODIGO WHERE tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],
+						
+							 $pagina);
 						}
 					}
 					?>
 				</tbody>
 			</table>
+			<div>
+
+			<?php
+					require_once "./Prueba_imagen.php";
+					// consultarDatos('SELECT * FROM articulo;');
+					$pagina = isset($_GET['page'])?$_GET['page']:0;
+					if($_SESSION['usuario_login']['ROL'] == 0){
+						// if(!isset($_GET['filtro'])){
+						// 	consultarDatos('SELECT * FROM articulo;');
+						// } else if(isset($_GET['filtro']) && $_GET['filtro'] == 'todos'){
+						// 	consultarDatos('SELECT * FROM articulo;');
+						// } else if(isset($_GET['filtro']) && $_GET['filtro'] == 'fungibles') {
+						// 	consultarDatos('SELECT a.* from ARTICULO a, FUNGIBLE f where a.CODIGO = f.CODIGO;');
+						// } else if(isset($_GET['filtro']) && $_GET['filtro'] == 'nofungibles') {
+						// 	consultarDatos('SELECT a.* from ARTICULO a, NOFUNGIBLE f where a.CODIGO = f.CODIGO;');
+						// }
+						if (isset($_GET['filtro']) && $_GET['filtro'] == 'departamento') {
+							$codigo_departamento = $_GET['codigo'];
+							pintarPaginador('SELECT COUNT(a.*) FROM articulo a
+											INNER JOIN tiene t ON a.CODIGO = t.COD_ARTICULO
+											INNER JOIN departamento d ON t.COD_DEPARTAMENTO = d.codigo
+											WHERE d.codigo = '.$codigo_departamento, 'departamento', $pagina);
+						} else if (isset($_GET['filtro']) && $_GET['filtro'] == 'todos') {
+							pintarPaginador('SELECT COUNT(*) FROM articulo','todos',$pagina);
+						} else if (isset($_GET['filtro']) && $_GET['filtro'] == 'fungibles') {
+							pintarPaginador(
+						
+							'SELECT COUNT(a.codigo) FROM ARTICULO a, FUNGIBLE f WHERE a.CODIGO = f.CODIGO',
+
+							'fungibles',$pagina
+
+						);
+						} else if (isset($_GET['filtro']) && $_GET['filtro'] == 'nofungibles') {
+							pintarPaginador(
+							
+							'SELECT COUNT(a.codigo) FROM ARTICULO a, NOFUNGIBLE f WHERE a.CODIGO = f.CODIGO',
+
+						'nofungibles',$pagina );
+						} else {
+							pintarPaginador('SELECT COUNT(*) FROM articulo','todos',$pagina);
+						}
+					} else if($_SESSION['usuario_login']['ROL'] == 1) {
+						// consultarDatos('SELECT * FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'].';');
+						if(!isset($_GET['filtro'])){
+							pintarPaginador(
+						
+							'SELECT COUNT(codigo) FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],
+
+							NULL, $pagina
+						
+						);
+						} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'todos'){
+							pintarPaginador(
+						
+						'SELECT COUNT(codigo) FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],
+						'todos',$pagina
+						
+						);
+						} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'fungibles') {
+							pintarPaginador(
+						
+							'SELECT COUNT(codigo)  FROM articulo INNER JOIN tiene ON ARTICULO.CODIGO = TIENE.COD_ARTICULO INNER JOIN fungible ON articulo.CODIGO = fungible.CODIGO WHERE tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],
+						'fungibles',$pagina);
+
+						} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'nofungibles') {
+							pintarPaginador(
+						
+							'SELECT COUNT(codigo) FROM articulo INNER JOIN tiene ON ARTICULO.CODIGO = TIENE.COD_ARTICULO INNER JOIN nofungible ON articulo.CODIGO = nofungible.CODIGO WHERE tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],
+						'nofungibles', $pagina);
+						}
+					}
+					?>
+
+
+			</div>
 		</div>
 	</div>
 	

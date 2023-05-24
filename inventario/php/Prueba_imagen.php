@@ -59,14 +59,21 @@
         $updateQuery->execute();
     }
 
-    function consultarDatos($consulta){
+    function consultarDatos($consulta,$numeroPagina=0){
         require "./conexion.php";
         try {
             $db = new PDO($conexion, $usuario, $contrasena);
+    
+            
+            $itemsPagina = 10;
+            $consultaFinal=$consulta. ' LIMIT '.$itemsPagina.' OFFSET ' . $numeroPagina * $itemsPagina;
+           
+
             // $sql = "SELECT * FROM articulo;";
             //Preparo la consulta
-            $preparada = $db->prepare($consulta);
+            $preparada = $db->prepare($consultaFinal);
             $preparada->execute();
+            
 
             /*Utilizamos el método fetchAll() para obtener todos los
             resultados de la consulta como un arreglo. 
@@ -76,6 +83,7 @@
             PDO::FETCH_ASSOC se pueden obtener los resultados de la 
             consulta de manera más legible y fácil de manejar*/
             $resultados = $preparada->fetchAll(PDO::FETCH_ASSOC);
+            $preparada->closeCursor();
 
             foreach ($resultados as $row){
                 
@@ -159,11 +167,70 @@
                     <?php
                     }
                 echo '</tr>';
+                
             }
+            // echo $count;
+            // echo $numeroPagina;
+          
             return TRUE;
         } catch (PDOException $e) {
             echo "Error en la base de datos " . $e->getMessage();
             return FALSE;
         }
     }
+
+
+
+    function pintarPaginador($consultaCount,$filtro,$numeroPagina=0){
+        require "./conexion.php";
+        try {
+            $db = new PDO($conexion, $usuario, $contrasena);
+            $preparadaCount = $db->prepare($consultaCount);
+            $preparadaCount->execute();
+            $count=0;
+
+            // $preparadaCount->bindParam(':cuenta',$count);
+            $count = $preparadaCount->fetch()[0];
+            $preparadaCount->closeCursor();
+            $itemsPagina = 10;
+            $page_count = ($count -1)/$itemsPagina;
+            echo '<div class="block-27" style="margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center;">
+                <ul class="pagination" id="paginador" style="padding: 0; margin: 0;">';
+
+             for ($i = 0; $i <= $page_count; $i++) {
+
+                if ($i == $numeroPagina) { // esta es la pagina actual
+                    echo '<li class="active" style="display: inline-block; font-weight: 400; margin-left: 5px;">
+                            <a  href="lista.php?filtro='.$filtro.'&page=' . ($i) . '" class="page_link" style="text-align: center; margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales);
+                            display: inline-block; background-image: linear-gradient(to right, rgba(106, 17, 203, 1) 0%, rgba(37, 117, 252, 1) 100%);
+                            box-shadow: 0 .5rem 1rem rgba(0, 123, 255, .2); color: white; transition: 0.3s linear;">
+                                <span style="text-align: center; margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales);
+                                display: inline-block; background-image: linear-gradient(to right, rgba(106, 17, 203, 1) 0%, rgba(37, 117, 252, 1) 100%);
+                                box-shadow: 0 .5rem 1rem rgba(0, 123, 255, .2); color: white; transition: 0.3s linear;">'.($i+1).'</span></a></li>';
+
+                } else { // mostrar enlace a otra página
+                    echo '<li style="display: inline-block; font-weight: 400; margin-left: 5px;">
+                            <a href="lista.php?filtro='.$filtro.'&page=' .($i) . '" class="page_link" style="text-align: center;
+                            margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales); display: inline-block;">
+                                <span style="text-align: center; margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales); display: inline-block;">'.($i+1).'</span>
+                            </a>
+                        </li>';
+                    // echo '<a href="lista.php?filtro='.$filtro.'&page=' . $i . '">Page ' . $i . '</a><br>';
+                }
+             }
+
+             echo '</ul> <div>';
+
+            return TRUE;
+        } catch (PDOException $e) {
+            echo "Error en la base de datos " . $e->getMessage();
+            return FALSE;
+        }
+    }
+
+
+
 ?>
+
+
+
