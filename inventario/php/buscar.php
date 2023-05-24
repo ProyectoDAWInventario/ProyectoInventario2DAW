@@ -293,7 +293,7 @@
 		</div>
 	</div>
 
-    <footer class=" gradient-custom p-3 ">
+    <footer class="gradient-custom p-3 ">
         <nav class="navbar navbar-expand-md navbar-light text-light d-flex justify-content-center mt-0">
             <div class="texto-footer" style="text-align:center;">IES JULIO VERNE Curso(2022-2023)<br> Creado por Brenda, Daniel, Javier, Nerea y Raúl  &#169;</div>
         </nav>

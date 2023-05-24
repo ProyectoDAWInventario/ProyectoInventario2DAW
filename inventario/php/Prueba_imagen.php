@@ -178,9 +178,7 @@
             return FALSE;
         }
     }
-
-
-
+    
     function pintarPaginador($consultaCount,$filtro,$numeroPagina=0){
         require "./conexion.php";
         try {
@@ -190,7 +188,10 @@
             $count=0;
 
             // $preparadaCount->bindParam(':cuenta',$count);
-            $count = $preparadaCount->fetch()[0];
+            if($preparadaCount->rowCount() > 0) {
+                $count = $preparadaCount->fetch()[0];
+            }
+            
             $preparadaCount->closeCursor();
             $itemsPagina = 10;
             $page_count = ($count -1)/$itemsPagina;
