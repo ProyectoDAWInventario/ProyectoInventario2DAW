@@ -16,6 +16,7 @@
 4. FILTROS:
   - Mostrar articulos por departamento. HECHO Y REVISAR
 5. TODOS: Revisar que el buscador funcione y el diseño
+6. Al insertar la paginacion en lista.php sale scroll horizontal y si se filtra por departamento sale un error. IMPORTANTE REVISAR
 
 ## MODIFICACIONES DANIEL
 * El confirmar borrar de un material ya funciona y faltaría darle estilos.
