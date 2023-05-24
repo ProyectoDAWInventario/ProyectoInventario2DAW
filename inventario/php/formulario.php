@@ -88,6 +88,17 @@ footer {
   }
 }
 	</style>
+    <script>
+        function validarFormulario() {
+            // Verificamos si el usuario ha dejado la opción por defecto
+            var departamento = document.getElementById('selectDepartamento').value;
+            if (departamento === "- Seleccione su departamento -") {
+            // Se muestra un mensaje de error
+            alert("Seleccione un departamento");
+            return false; // Evitar el envío del formulario
+            }
+        }
+    </script>
 </head>
     <body>
         <header class="gradient-custom">
@@ -107,7 +118,7 @@ footer {
         </header> 
         
         <div class="container-fluid" style="padding-bottom: 100px;">
-            <form action="anadirMaterial.php" method="POST" enctype="multipart/form-data">
+            <form action="anadirMaterial.php" method="POST" enctype="multipart/form-data" onsubmit="return validarFormulario()">
                 <div class="row">
                     <div class="col-12 ">
                         <div class="row datos " >
