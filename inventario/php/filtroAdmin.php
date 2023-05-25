@@ -2,6 +2,7 @@
 require_once('../../archivosComunes/conexion.php');
 
 $filtro_departamento = $_POST['filtro_departamento'];
+$filtro_fungibles = $_POST['filtro_fungible'];
 
 if ($filtro_departamento == "0") {
     header("Location: lista.php?filtro=todos");
@@ -25,3 +26,33 @@ if ($filtro_departamento == "0") {
     // }
 }
 ?>
+
+
+<?php
+			session_start();
+			if($_SESSION['usuario_login']['ROL'] == 0){
+		?>
+		<div class="container">
+			<form method="post" action='filtroAdmin.php'>
+				<select class="form-control" id="filtro_departamento" name="filtro_departamento">
+					<option value="0">Todos</option>
+					<?php 
+					require_once('../../archivosComunes/conexion.php');
+					$consulta = "SELECT * FROM departamento";
+					$resultado = $db->query($consulta);
+
+					foreach ($resultado as $row) {
+						echo '<option value="'.$row['codigo'].'">'.$row['NOMBRE'].'</option>';
+					}
+					?>
+				</select>
+				<input type="submit" value="Filtrar">
+				<?php
+					if(isset($_GET['codigo'])){
+				?>
+				<input type="hidden" name="filtro_dpto" id="filtro_dpto" value="<?php echo $_GET['codigo'] ?>">
+				<?php } ?>
+			</form>
+		</div>
+		<br>
+		<?php } ?>

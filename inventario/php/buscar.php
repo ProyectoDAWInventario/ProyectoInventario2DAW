@@ -104,47 +104,46 @@
     <div>
 		<form method="post" action="cookieFiltro.php">
 			<fieldset name="filtro" id="filtro">
+				<!-- FILTRO FUNGIBLE -->
 				<ul>
 					<li>
-						<input type="radio" name="filtro" value="todos"> TODOS
+						<input type="radio" name="filtro" value="todos" <?php if(!isset($_GET['filtro']) || (isset($_GET['filtro']) && $_GET['filtro'] == "todos")) echo 'checked'; ?>> TODOS
 					</li>
 					<li>
-						<input type="radio" name="filtro" value="fungibles"> FUNGIBLES
+						<input type="radio" name="filtro" value="fungibles" <?php if(isset($_GET['filtro']) && $_GET['filtro'] == "fungibles") echo 'checked'; ?>> FUNGIBLES
 					</li>
 					<li>
-						<input type="radio" name="filtro" value="nofungibles"> NO FUNGIBLES
+						<input type="radio" name="filtro" value="nofungibles" <?php if(isset($_GET['filtro']) && $_GET['filtro'] == "nofungibles") echo 'checked'; ?>> NO FUNGIBLES
 					</li>
 				</ul>
 				
+				<!-- FILTRO DEPARTAMENTO -->
+				<?php
+					if($_SESSION['usuario_login']['ROL'] == 0){
+				?>
+					<select class="form-control" id="filtro_departamento" name="filtro_departamento" style="width: 300px;">
+						<option value="0">Todos</option>
+						<?php 
+						require_once('../../archivosComunes/conexion.php');
+						$consulta = "SELECT * FROM departamento";
+						$resultado = $db->query($consulta);
+
+						foreach ($resultado as $row) {
+							echo '<option value="'.$row['codigo'].'">'.$row['NOMBRE'].'</option>';
+						}
+						?>
+					</select>
+					<?php
+						if(isset($_GET['codigo'])){
+					?>
+						<input type="hidden" name="filtro_dpto" id="filtro_dpto" value="<?php echo $_GET['codigo'] ?>">
+					<?php } ?>
+				<?php } ?>
+				<br>
 				<input class="btn gradient-custom shadow" style="color: white" name="aplicar_filtros" id="aplicar_filtros" type="submit" value="Aplicar filtro">
 			</fieldset>
 		</form>
 		<br>
-		<?php
-			if($_SESSION['usuario_login']['ROL'] == 0){
-		?>
-		<form method="post" action="filtroAdmin.php">
-			<select class="form-control" id="filtro_departamento" name="filtro_departamento">
-				<option value="0">Todos</option>
-				<?php 
-				require_once('../../archivosComunes/conexion.php');
-				$consulta = "SELECT * FROM departamento";
-				$resultado = $db->query($consulta);
-
-				foreach ($resultado as $row) {
-					echo '<option value="'.$row['codigo'].'">'.$row['NOMBRE'].'</option>';
-				}
-				?>
-			</select>
-			<input type="submit" value="Filtrar">
-			<?php
-				if(isset($_GET['codigo'])){
-			?>
-			<input type="hidden" name="filtro_dpto" id="filtro_dpto" value="<?php echo $_GET['codigo'] ?>">
-			<?php } ?>
-		</form><br>
-		<?php } ?>		
-
 	</div>
     <div class="container-fluid" style="padding-bottom: 150px;" id="tablaArticulos">
 		<div class="table-responsive ">

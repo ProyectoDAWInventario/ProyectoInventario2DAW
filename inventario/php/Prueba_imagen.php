@@ -1,7 +1,6 @@
 <?php
 
-    function anadir_img($nombre, $numero, $descripcion, $localizacion, 
-    $unidades, $procedencia, $motivo_bj, $fecha_bj, $img){
+    function anadir_img($nombre, $numero, $descripcion, $localizacion, $unidades, $procedencia, $motivo_bj, $fecha_bj, $img){
 
         
     	require "./conexion.php";
@@ -179,7 +178,7 @@
         }
     }
     
-    function pintarPaginador($consultaCount,$filtro,$numeroPagina=0){
+    function pintarPaginador($consultaCount,$filtro,$numeroPagina=0,$dpto_seleccionado=0){
         require "./conexion.php";
         try {
             $db = new PDO($conexion, $usuario, $contrasena);
@@ -189,6 +188,7 @@
 
             // $preparadaCount->bindParam(':cuenta',$count);
             if($preparadaCount->rowCount() > 0) {
+                
                 $count = $preparadaCount->fetch()[0];
             }
             
@@ -201,6 +201,15 @@
              for ($i = 0; $i <= $page_count; $i++) {
 
                 if ($i == $numeroPagina) { // esta es la pagina actual
+                    if($dpto_seleccionado != 0) {
+                        echo '<li class="active" style="display: inline-block; font-weight: 400; margin-left: 5px;">
+                            <a  href="lista.php?filtro='.$filtro.'&codigo='.$dpto_seleccionado.'&page=' . ($i) . '" class="page_link" style="text-align: center; margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales);
+                            display: inline-block; background-image: linear-gradient(to right, rgba(106, 17, 203, 1) 0%, rgba(37, 117, 252, 1) 100%);
+                            box-shadow: 0 .5rem 1rem rgba(0, 123, 255, .2); color: white; transition: 0.3s linear;">
+                                <span style="text-align: center; margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales);
+                                display: inline-block; background-image: linear-gradient(to right, rgba(106, 17, 203, 1) 0%, rgba(37, 117, 252, 1) 100%);
+                                box-shadow: 0 .5rem 1rem rgba(0, 123, 255, .2); color: white; transition: 0.3s linear;">'.($i+1).'</span></a></li>';
+                    } else {
                     echo '<li class="active" style="display: inline-block; font-weight: 400; margin-left: 5px;">
                             <a  href="lista.php?filtro='.$filtro.'&page=' . ($i) . '" class="page_link" style="text-align: center; margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales);
                             display: inline-block; background-image: linear-gradient(to right, rgba(106, 17, 203, 1) 0%, rgba(37, 117, 252, 1) 100%);
@@ -208,14 +217,23 @@
                                 <span style="text-align: center; margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales);
                                 display: inline-block; background-image: linear-gradient(to right, rgba(106, 17, 203, 1) 0%, rgba(37, 117, 252, 1) 100%);
                                 box-shadow: 0 .5rem 1rem rgba(0, 123, 255, .2); color: white; transition: 0.3s linear;">'.($i+1).'</span></a></li>';
-
+                    }
                 } else { // mostrar enlace a otra página
+                    if($dpto_seleccionado != 0){
                     echo '<li style="display: inline-block; font-weight: 400; margin-left: 5px;">
+                            <a href="lista.php?filtro='.$filtro.'&codigo='.$dpto_seleccionado.'&page=' .($i) . '" class="page_link" style="text-align: center;
+                            margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales); display: inline-block;">
+                                <span style="text-align: center; margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales); display: inline-block;">'.($i+1).'</span>
+                            </a>
+                        </li>';
+                    } else {
+                        echo '<li style="display: inline-block; font-weight: 400; margin-left: 5px;">
                             <a href="lista.php?filtro='.$filtro.'&page=' .($i) . '" class="page_link" style="text-align: center;
                             margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales); display: inline-block;">
                                 <span style="text-align: center; margin: 0; width: 40px; height: auto; line-height: 30px; color: var(--gris-senales); display: inline-block;">'.($i+1).'</span>
                             </a>
                         </li>';
+                    }
                     // echo '<a href="lista.php?filtro='.$filtro.'&page=' . $i . '">Page ' . $i . '</a><br>';
                 }
              }
@@ -228,8 +246,6 @@
             return FALSE;
         }
     }
-
-
 
 ?>
 
