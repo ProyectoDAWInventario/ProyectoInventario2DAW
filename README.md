@@ -13,6 +13,7 @@
   - Mostrar articulos por departamento. HECHO Y REVISAR
   - REVISAR TODOS LOS FILTROS Y QUE SE PUEDAN FILTRAR VARIOS A LA VEZ
 5. TODOS: Revisar que el buscador funcione y el diseño
+6. En buscar.php no aparece el footer cuando esta el codigo puesto
 
 
 ## MODIFICACIONES DANIEL
