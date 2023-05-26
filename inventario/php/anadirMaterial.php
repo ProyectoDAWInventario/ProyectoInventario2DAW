@@ -68,7 +68,7 @@
                 else {
                     $consultaNoFungibles = "INSERT INTO nofungible(CODIGO, FECHA) VALUES (?,?);";
                     $consultaNoFungibles = $db->prepare($consultaNoFungibles);
-                    $consultaNoFungibles->execute(array($codArticulo, date('Y')));
+                    $consultaNoFungibles->execute(array(($codArticulo+1), date('Y')));
                 }
             }
         }

@@ -178,8 +178,8 @@ CREATE TABLE AnexoIII_Pertenece (
 );
 
 -- Valores de las tabla Usuarios
-insert into Usuario(DNI,NOMBRE, APELLIDOS, EMAIL, CLAVE, ROL, VALIDAR)
-values('11111111A', 'administrador', 'administrador', 'incidencias@iesbargas.com','AppIncidencias',0,'si');
+insert into Usuario(DNI,NOMBRE, APELLIDOS, EMAIL, CLAVE, ROL, VALIDAR, DEPARTAMENTO)
+values('11111111A', 'administrador', 'administrador', 'incidenciasiesbargas@gmail.com','AppIncidencias',0,'si', 8);
 
 -- Valores de las tabla Departamentos
 insert into Departamento(REFERENCIA, NOMBRE, JEFE, UBICACION)

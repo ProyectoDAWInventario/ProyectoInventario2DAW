@@ -21,22 +21,22 @@ foreach ($articulos as $articulo) {
 }
 //Hago una consulta a la base de datos para obtener el codigo del articulo fungible
 $query2 = 'select * from fungible where CODIGO = ' . $_GET["cod"];
-$articulos = $db->query($query2);
-foreach ($articulos as $articulo) {
+$articulos2 = $db->query($query2);
+foreach ($articulos2 as $articulo) {
     $codigofungible = $articulo["CODIGO"];
 }
 
 //Hago una consulta a la base de datos para obtener el codigo del articulo fungible
 $query3 = 'select * from nofungible where CODIGO = ' . $_GET["cod"];
-$articulos = $db->query($query3);
-foreach ($articulos as $articulo) {
+$articulos3 = $db->query($query3);
+foreach ($articulos3 as $articulo) {
     $codigonofungible = $articulo["CODIGO"];
 }
 
 
 //Hago una consulta a la base de datos para obtener el codigo del departamento
 $email =  $_SESSION["usuario_login"]["EMAIL"];
-$query4 = "select DEPARTAMENTO from usuario where ROL=1 AND EMAIL= '$email'";
+$query4 = "select DEPARTAMENTO from usuario where EMAIL= '$email'";
 $departamentos = $db->query($query4);
 foreach ($departamentos as $departamento) {
     $codigodepartamentos = $departamento["DEPARTAMENTO"];
@@ -217,15 +217,9 @@ foreach ($nombres as $nom) {
                                         <input type="text" id="motibo_bj" name="motivo_bj" class="form-control" placeholder="Motivo de la baja" value="<?php echo $motivBaja ?>" />
                                     </div>
 
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 ">
                                         <label for="imagen" class="form-label img">Imagen</label>
-                                        <div class="d-flex align-items-center">
-                                            <label for="file" class="custom-button">Examinar</label>
-                                            <input type="file" id="file" class="input-file" name="imagen">
-                                            <input type="text" class="form-control"  name="rutaImagen" value="<?php echo $rutaImagen ?>" >
-                                           
-                                        </div>
-
+                                        <input type="file" class="form-control" id="imagen" name="imagen">
                                     </div>
 
 
@@ -277,6 +271,13 @@ foreach ($nombres as $nom) {
                                             }
                                             ?>
                                         </select>
+                                        <?php 
+                                            if($_SESSION['usuario_login']['ROL'] != 0){
+                                                print "<script>
+                                                    document.getElementById('selectDepartamento').disabled = true;
+                                                </script>";
+                                            }
+                                        ?>
                                     </div>
                                     <script>
                                         let selector = document.getElementById('selectDepartamento');
@@ -299,7 +300,7 @@ foreach ($nombres as $nom) {
                                             <input id="btn-guardar" type="submit" class="btn gradient-custom shadow" style="color: white" name="btn-guardar" value="Guardar">
                                         </div>
                                         <div class="col-sm-6 text-center">
-                                            <a href="../index.html" id="btn-salir" class="btn gradient-custom shadow" style="color: white" name="salir" value="Salir">Salir</a>
+                                            <a href="lista.php" id="btn-salir" class="btn gradient-custom shadow" style="color: white" name="salir" value="Salir">Salir</a>
                                         </div>
                                     </div>
 
