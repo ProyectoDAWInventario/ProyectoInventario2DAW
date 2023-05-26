@@ -217,7 +217,7 @@
             echo '<div class="block-27" style="margin-top: 50px; margin-bottom: 50px; display: flex; justify-content: center;">
                 <ul class="pagination" id="paginador" style="padding: 0; margin: 0;">';
 
-             for ($i = 0; $i <= $page_count; $i++) {
+             for ($i = 0; $i < $page_count; $i++) {
 
                 if ($i == $numeroPagina) { // esta es la pagina actual
                     if($dpto_seleccionado != 0) {

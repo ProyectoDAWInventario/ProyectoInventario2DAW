@@ -377,7 +377,7 @@
 						} else if($_SESSION['usuario_login']['ROL'] == 1) {
 							// consultarDatos('SELECT * FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'].';');
 							if(!isset($_GET['filtro'])){
-								pintarPaginador('SELECT COUNT(articulo.codigo) FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],NULL, $pagina);
+								pintarPaginador('SELECT COUNT(articulo.codigo) FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],'todos', $pagina);
 							} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'todos'){
 								pintarPaginador('SELECT COUNT(articulo.codigo) FROM articulo INNER JOIN tiene WHERE ARTICULO.CODIGO = TIENE.COD_ARTICULO AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],'todos',$pagina);
 							} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'fungibles') {
@@ -386,7 +386,7 @@
 								pintarPaginador('SELECT COUNT(articulo.codigo) FROM articulo INNER JOIN tiene ON ARTICULO.CODIGO = TIENE.COD_ARTICULO INNER JOIN fungible ON articulo.CODIGO = fungible.CODIGO WHERE fungible.PEDIR = "si" AND tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],'fungiblespedir',$pagina);
 							} else if(isset($_GET['filtro']) && $_GET['filtro'] == 'nofungibles') {
 								pintarPaginador('SELECT COUNT(articulo.codigo) FROM articulo INNER JOIN tiene ON ARTICULO.CODIGO = TIENE.COD_ARTICULO INNER JOIN nofungible ON articulo.CODIGO = nofungible.CODIGO WHERE tiene.COD_DEPARTAMENTO = '.$_SESSION['usuario_login']['DEPARTAMENTO'],'nofungibles', $pagina);
-							}
+							} 
 						}
 					?>
 				</div>
