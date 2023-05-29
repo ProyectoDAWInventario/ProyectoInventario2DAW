@@ -3,8 +3,7 @@
 1. RAUL: Corregir diseño de algunas páginas.
 2. TODOS: Testear el proyecto entero probando funciones y todo tipo de posibilidades para ver posibles errores o cambios.
 3. TODOS: PONER EL LOGIN REQUERIDO A TODOS LOS FICHEROS (../../archivosComunes/loginrequerido.php)
-4. RAUL: cuando no se encuentren resultados poner mensaje de que no encuentra nada
-5. TODOS: Al actualizar, revisar que cambia y añadir que si lo cambia de fungible a no fungible o al reves borre de una tabla e inserte en otra, al igual que con el departamento que cambie el departamento en la tabla tiene
+4. TODOS: Al actualizar, revisar que cambia y añadir que si lo cambia de fungible a no fungible o al reves borre de una tabla e inserte en otra, al igual que con el departamento que cambie el departamento en la tabla tiene
 
  ### REVISAR
 1. TODOS: Los articulos fungibles tienen que tener la opcion de pedirse o no. REVISAR
@@ -39,3 +38,4 @@
 
 ## MODIFICACIONES RAUL
 * Diseño de la paginacion
+* cuando no se encuentren resultados poner mensaje de que no encuentra nada
