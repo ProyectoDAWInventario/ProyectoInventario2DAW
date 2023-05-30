@@ -1,3 +1,12 @@
+<?php
+// Iniciamos la sesion
+session_start();
+if(!isset($_SESSION["usuario_login"])){
+	header("Location: ../../login.php?redirigido=true");
+};
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +51,13 @@
 			bottom: 0;
 			width: 100%;
 			font-size: 20px;
+
+		}
+		footer .row {
+			padding: 0;
+		}
+		footer p {
+			margin-bottom: 0;
 		}
 
 		.shadow-blue {
@@ -77,31 +93,14 @@
 		.card.shadow-blue:hover {
 			transform: scale(1.1);
 		}
-
 		
-		
-
-		/* .card#anadir, .card#editar, .card#excel {
-			padding: 30px;
-			transition: transform 0.2s ease-in-out;
-		}
-
-		.card#anadir:hover, .card#editar:hover, .card#excel:hover {
-			transform: scale(1.1);
-		} */
-
-		
-
-
-
-	
 	</style>
 </head>
 
 <body>
 	<header class="gradient-custom ">
 		<nav class="navbar navbar-expand navbar-light p-3 me-5 ms-5">
-			<a class="navbar-brand text-light" href="index.html">Inventario</a>
+			<a class="navbar-brand text-light" href="index.php">Inventario</a>
 			<ul class="navbar-nav flex-row flex-wrap text-light ms-auto">
 				<li class="nav-item dropdown"><i id="iniciar_sesion" class="bi bi-person
 								nav-link dropdown text-light" role="button" data-bs-toggle="dropdown" style="text-align: right;"> Mi
@@ -117,7 +116,7 @@
 		</nav>
 	</header>
 
-	<div class="container-fluid d-flex justify-content-center align-items-center " style="min-height: 76vh;">
+	<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 76vh; padding-bottom: 200px;">
 		<!-- <div class="row centro "> -->
 			<div class="col-12 contenedor " >
 				<div class="row elegir d-flex justify-content-center align-items-center p-2">		
@@ -155,14 +154,25 @@
 		<!-- </div> -->
 	</div>
 
-	<footer class=" gradient-custom p-3 ">
-		<nav class="navbar navbar-expand-md navbar-light text-light d-flex
-					justify-content-center mt-0">
-			<div class="texto-footer" style="text-align:center;">IES JULIO VERNE
-				Curso(2022-2023)<br> Creado por Brenda, Daniel, Javier, Nerea y Raúl
-				&#169;</div>
-		</nav>
+	<footer class="gradient-custom p-3">
+		<div class="container text-light">
+			<div class="row p-0">
+				<div class="col-12 text-center">
+					<p>IES JULIO VERNE <br> Curso(2022-2023)&#169;</p>
+				</div>
+			</div>
+			<div class="row text-center p-0">
+				<div class="col-md-6">
+					<p>Creado por: <br> Brenda Serafín Camara <br> Daniel Andrés Bravo</p>
+				</div>
+				
+				<div class="col-md-6">
+					<p>Javier Díaz Marcos <br> Nerea Domínguez Alcalde <br> Raúl Gómez Hernández</p>
+				</div>
+			</div>
+		</div>
 	</footer>
+	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 		crossorigin="anonymous"></script>

@@ -1,8 +1,13 @@
 <?php
 	//print_r($_POST);
 	//print_r($_FILES);
+    session_start();
+    if(!isset($_SESSION["usuario_login"])){
+        header("Location: ../../login.php?redirigido=true");
+    };
+    
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
-        require_once("Prueba_imagen.php"); 
+        require_once("funcionesBBDD.php"); 
 
         if(isset($_POST["btn-guardar"])){
             if($_POST["fecha_bj"] == ''){

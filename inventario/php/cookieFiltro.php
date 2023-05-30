@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if(!isset($_SESSION["usuario_login"])){
+        header("Location: ../../login.php?redirigido=true");
+    };
     require_once('../../archivosComunes/conexion.php');
 
     $filtro_departamento = $_POST['filtro_departamento'];

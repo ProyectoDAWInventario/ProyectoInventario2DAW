@@ -1,5 +1,9 @@
 <?php
     require_once('../../archivosComunes/conexion.php');
+    session_start();
+    if(!isset($_SESSION["usuario_login"])){
+        header("Location: ../../login.php?redirigido=true");
+    };
     $consulta = "SELECT * FROM fungible WHERE CODIGO = ?";
     $consulta = $db->prepare($consulta);
     $consulta->execute(array($_GET['cod']));

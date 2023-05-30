@@ -1,5 +1,9 @@
 <!-- Clase que modeliza todas las propiedades del objeto material instituto -->
 <?php
+session_start();
+if(!isset($_SESSION["usuario_login"])){
+	header("Location: ../../login.php?redirigido=true");
+};
 
 class MaterialInstituto {
     private $departamento;

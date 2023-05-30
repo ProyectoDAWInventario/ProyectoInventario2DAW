@@ -30,7 +30,7 @@ require_once('verRol.php');
         <img src="../images/mantenimiento2.png" alt="Mantenimiento2">
       </a>
 
-      <a href="../inventario/index.html" id="inventario">
+      <a href="../inventario/index.php" id="inventario">
         Inventario
         <img src="../images/inventario1.jpg" alt="imagen Inventario1">
         <img src="../images/inventario2.png" alt="imagen Inventario2">

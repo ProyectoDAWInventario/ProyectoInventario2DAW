@@ -1,9 +1,12 @@
 <?php
+    session_start();
+    if(!isset($_SESSION["usuario_login"])){
+        header("Location: ../../login.php?redirigido=true");
+    };
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        session_start();
-        require("Prueba_imagen.php"); 
+        require("funcionesBBDD.php"); 
         require_once('../../archivosComunes/conexion.php');
-        require_once('../../archivosComunes/loginRequerido.php');
         if(isset($_POST["btn-guardar"])){
             if($_SESSION["usuario_login"]['ROL'] == 1){
                 $nombreDepartamento = $_POST['nombreDepartamento'];
@@ -65,10 +68,10 @@
                     $consultaFungibles = $db->prepare($consultaFungibles);
                     $consultaFungibles->execute(array($codArticulo, 'no'));
                 } // NO FUNGIBLES
-                else {
+                else if($_POST['fungible'] == 0){
                     $consultaNoFungibles = "INSERT INTO nofungible(CODIGO, FECHA) VALUES (?,?);";
                     $consultaNoFungibles = $db->prepare($consultaNoFungibles);
-                    $consultaNoFungibles->execute(array(($codArticulo+1), date('Y')));
+                    $consultaNoFungibles->execute(array($codArticulo, date('Y')));
                 }
             }
         }

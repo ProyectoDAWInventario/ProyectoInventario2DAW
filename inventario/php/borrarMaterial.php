@@ -1,6 +1,10 @@
 <?php
     // Tenemos que borrar en todas las tablas donde tenga el registro que se desea borrar
     require_once("../../archivosComunes/conexion.php");
+    session_start();
+    if(!isset($_SESSION["usuario_login"])){
+        header("Location: ../../login.php?redirigido=true");
+    };
     
     // Delete sobre la tabla tiene, es decir, la union del departamento y los articulos
     $consulta2 = "DELETE FROM tiene WHERE COD_ARTICULO = ".$_GET['cod'].";";

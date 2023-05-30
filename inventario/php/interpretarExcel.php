@@ -4,6 +4,10 @@ Es necesario descagar en la terminal el paquete: composer require phpoffice/phps
 require_once '../../vendor/autoload.php';
 require_once 'materialInstituto.php';
 require_once 'materialBBDD.php';
+session_start();
+if(!isset($_SESSION["usuario_login"])){
+	header("Location: ../../login.php?redirigido=true");
+};
 
 
 //Se utiliza por defecto Spreadsheet sin tener que indicar la ruta completa

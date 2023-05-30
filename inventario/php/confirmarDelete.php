@@ -1,6 +1,11 @@
 <?php
 $db = require_once('conexion.php');
 
+session_start();
+if(!isset($_SESSION["usuario_login"])){
+	header("Location: ../../login.php?redirigido=true");
+};
+
 //Hago una consulta a la base de datos para obtener la informacion del articulo seleccionado
 $query = 'select * from articulo where CODIGO = ' . $_GET["cod"];
 $articulos = $db->query($query);

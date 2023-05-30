@@ -1,6 +1,9 @@
 <?php
 // Iniciamos la sesion
 session_start();
+if(!isset($_SESSION["usuario_login"])){
+	header("Location: ../../login.php?redirigido=true");
+};
 // Para acceder a esta pagina hay que iniciar sesion previamente.
 require_once('conexion.php');
 
@@ -11,7 +14,7 @@ require_once('conexion.php');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Formulario</title>
+    <title>Cargar Excel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boot20:35 12/05/2023strap-icons@1.10.3/font/bootstrap-icons.css">
@@ -44,6 +47,13 @@ require_once('conexion.php');
         input[type="file"]:hover {
             color: #0d6efd !important;
             background-color: white;
+        }
+
+        footer .row {
+            padding: 0;
+        }
+        footer p {
+            margin-bottom: 0;
         }
 
         .gradient-custom {
@@ -101,7 +111,7 @@ require_once('conexion.php');
 <body>
     <header class="gradient-custom">
         <nav class="navbar navbar-expand-md navbar-light p-3 ms-4 me-4">
-            <a class="navbar-brand text-light " href="../index.html">Inventario</a>
+            <a class="navbar-brand text-light " href="../index.php">Inventario</a>
             <ul class="navbar-nav flex-row flex-wrap text-light ms-auto">
                 <li class="nav-item dropdown">
                     <i id="iniciar_sesion" class="bi bi-person nav-link dropdown text-light" role="button" data-bs-toggle="dropdown" style="text-align: right;"> Mi cuenta</i>
@@ -133,11 +143,24 @@ require_once('conexion.php');
         </form>
     </div>
 
-    <footer class=" gradient-custom p-3 ">
-        <nav class="navbar navbar-expand-md navbar-light text-light d-flex justify-content-center mt-0">
-            <div class="texto-footer" style="text-align:center;">IES JULIO VERNE Curso(2022-2023)<br> Creado por Brenda, Daniel, Javier, Nerea y Raúl &#169;</div>
-        </nav>
-    </footer>
+    <footer class="gradient-custom p-3">
+		<div class="container text-light">
+			<div class="row">
+				<div class="col-12 text-center">
+					<p>IES JULIO VERNE <br>Curso(2022-2023)&#169;</p>
+				</div>
+			</div>
+			<div class="row text-center">
+				<div class="col-md-6">
+					<p>Creado por: <br> Brenda Serafín Camara <br> Daniel Andrés Bravo</p>
+				</div>
+				
+				<div class="col-md-6">
+					<p>Javier Díaz Marcos <br> Nera Domínguez Alcalde <br> Raúl Gómez Hernández</p>
+				</div>
+			</div>
+		</div>
+	</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 

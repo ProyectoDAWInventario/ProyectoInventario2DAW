@@ -3,6 +3,9 @@
 $db = require_once('conexion.php');
 
 session_start();
+if(!isset($_SESSION["usuario_login"])){
+	header("Location: ../../login.php?redirigido=true");
+};
 
 //Hago una consulta a la base de datos para obtener la informacion del articulo seleccionado
 $query = 'select * from articulo where CODIGO = ' . $_GET["cod"];
@@ -133,11 +136,12 @@ foreach ($nombres as $nom) {
 
         }
 
-        @media screen and (max-width: 768px) {
-            .texto-footer {
-                font-size: 14px;
-            }
-        }
+        footer .row {
+			padding: 0;
+		}
+		footer p {
+			margin-bottom: 0;
+		}
 
         @media (max-width: 767px) {
             .btn-container {
@@ -150,6 +154,16 @@ foreach ($nombres as $nom) {
                 margin-bottom: 10px;
                 width: 100%;
             }
+
+            .texto-footer {
+                font-size: 14px;
+            }
+
+            .main-form{
+                padding-bottom: 100px;
+            }
+
+            
         }
 
         /* Estilos personalizados para ocultar el input de tipo file */
@@ -172,7 +186,7 @@ foreach ($nombres as $nom) {
 
     <header class="gradient-custom">
         <nav class="navbar navbar-expand navbar-light p-3 ms-4 me-4">
-            <a class="navbar-brand text-light " href="../index.html">Inventario</a>
+            <a class="navbar-brand text-light " href="../index.php">Inventario</a>
             <ul class="navbar-nav flex-row flex-wrap text-light ms-auto">
                 <li class="nav-item dropdown">
                     <i id="iniciar_sesion" class="bi bi-person nav-link dropdown text-light" role="button" data-bs-toggle="dropdown" style="text-align: right;"> Mi cuenta</i>
@@ -187,7 +201,7 @@ foreach ($nombres as $nom) {
     </header>
 
 
-    <div class="container-fluid main-content">
+    <div class="container-fluid main-content" style="padding-bottom: 200px;">
         <form action="actualizar.php?cod=<?php echo $codigo ?>" method="POST" enctype="multipart/form-data" class="main-form d-flex justify-content-center align-items-center">
             <div class="row">
                 <div class="col-12 ">
@@ -251,7 +265,11 @@ foreach ($nombres as $nom) {
                                             }
                                             ?>
                                         </select>
-
+                                        <?php
+                                            print "<script>
+                                                document.getElementById('fungible').disabled = true;
+                                            </script>";
+                                        ?>
                                     </div>
 
                                     <div class="col-sm-12 col-md-12" id="departamento" name="departamento">
@@ -314,11 +332,24 @@ foreach ($nombres as $nom) {
     </div>
 
 
-    <footer class=" gradient-custom p-3 ">
-        <nav class="navbar navbar-expand-md navbar-light text-light d-flex justify-content-center mt-0">
-            <div class="texto-footer" style="text-align:center;">IES JULIO VERNE Curso(2022-2023)<br> Creado por Brenda, Daniel, Javier, Nerea y Raúl &#169;</div>
-        </nav>
-    </footer>
+    <footer class="gradient-custom p-3">
+		<div class="container text-light">
+			<div class="row">
+				<div class="col-12 text-center">
+					<p>IES JULIO VERNE <br>Curso(2022-2023)&#169;</p>
+				</div>
+			</div>
+			<div class="row text-center">
+				<div class="col-md-6">
+					<p>Creado por: <br> Brenda Serafín Camara <br> Daniel Andrés Bravo</p>
+				</div>
+				
+				<div class="col-md-6">
+					<p>Javier Díaz Marcos <br> Nera Domínguez Alcalde <br> Raúl Gómez Hernández</p>
+				</div>
+			</div>
+		</div>
+	</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 

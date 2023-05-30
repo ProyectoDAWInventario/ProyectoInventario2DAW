@@ -10,9 +10,13 @@
 <?php
 
     // INSTALAR composer require mdpf/mdpf
+    session_start();
     require_once('../../vendor/autoload.php');
     require_once('../../archivosComunes/conexion.php');
-    session_start();
+    if(!isset($_SESSION["usuario_login"])){
+        header("Location: ../../login.php?redirigido=true");
+    };
+    
 
     $mpdf = new \Mpdf\Mpdf(['orientation' => 'L']);
     // Cogemos el contenido del css que deseamos poner a la tabla
@@ -78,16 +82,16 @@
                         </thead>
                         <tbody>');
 
-        $mes_Actual = date('m');
-        $año_Actual = date('Y');
+        // $mes_Actual = date('m');
+        // $año_Actual = date('Y');
 
-        if($mes_Actual >= 9 && $mes_Actual <= 12){
-            $fecha_inicio = $año_Actual.'-09-01';
-            $fecha_fin = ($año_Actual+1).'-08-31';
-        } else if ($mes_Actual <= 8 && $mes_Actual > 0){
-            $fecha_inicio = ($año_Actual-1).'-09-01';
-            $fecha_fin = $año_Actual.'-08-31';
-        }
+        // if($mes_Actual >= 9 && $mes_Actual <= 12){
+        //     $fecha_inicio = $año_Actual.'-09-01';
+        //     $fecha_fin = ($año_Actual+1).'-08-31';
+        // } else if ($mes_Actual <= 8 && $mes_Actual > 0){
+        //     $fecha_inicio = ($año_Actual-1).'-09-01';
+        //     $fecha_fin = $año_Actual.'-08-31';
+        // }
         
         // consulta principal
         // $consulta = 'SELECT * FROM articulo WHERE fecha_alta BETWEEN ? AND ?';
@@ -97,8 +101,7 @@
                 FROM departamento d, articulo a, tiene t, NoFungible nf 
                 WHERE d.CODIGO = t.COD_DEPARTAMENTO 
                 AND t.COD_ARTICULO = a.CODIGO 
-                AND a.CODIGO = nf.CODIGO 
-                AND a.fecha_alta BETWEEN ? AND ?;';    
+                AND a.CODIGO = nf.CODIGO;';    
             } else {
                 $departamento = $_GET['codDepartamento'];
                 $consulta = "SELECT a.CODIGO, d.NOMBRE, a.FECHA_ALTA, a.NUM_SERIE, a.NOMBRE, a.DESCRIPCION, a.UNIDADES, a.LOCALIZACION, a.PROCEDENCIA_ENTRADA, a.MOTIVO_BAJA, a.FECHA_BAJA 
@@ -106,7 +109,6 @@
                 WHERE d.CODIGO = t.COD_DEPARTAMENTO 
                 AND t.COD_ARTICULO = a.CODIGO 
                 AND a.CODIGO = nf.CODIGO
-                AND a.fecha_alta BETWEEN ? AND ?
                 AND t.COD_DEPARTAMENTO = $departamento;";
             }
         } else if ($_SESSION['usuario_login']['ROL'] == 1) {
@@ -116,13 +118,12 @@
             WHERE d.CODIGO = t.COD_DEPARTAMENTO 
             AND t.COD_ARTICULO = a.CODIGO 
             AND a.CODIGO = nf.CODIGO
-            AND a.fecha_alta BETWEEN ? AND ?
             AND t.COD_DEPARTAMENTO = $departamento;";
         }
         
         //Preparo la consulta
         $preparada = $db->prepare($consulta);
-        $preparada->execute(array($fecha_inicio, $fecha_fin));
+        $preparada->execute(array());
         $resultados = $preparada->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($resultados as $row){
@@ -140,7 +141,6 @@
         }
     $mpdf->WriteHTML('</tbody>
                     </table>');
-    $mpdf->WriteHTML('fecha inicio: '.$fecha_inicio.'fecha fin: '.$fecha_fin);
     // PRIMER PARAMETRO: nombre que se dara al fichero al darle a guardar por defecto
     // SEGUNDO PARAMETRO: accion que realiza al pulsar el boton
     //      - I -> abre el pdf en otra pestaña con la opcion de descargarlo

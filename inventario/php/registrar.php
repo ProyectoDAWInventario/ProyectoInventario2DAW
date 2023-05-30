@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION["usuario_login"])){
+	header("Location: ../../login.php?redirigido=true");
+};
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
