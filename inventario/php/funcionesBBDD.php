@@ -2,7 +2,6 @@
 
     function anadir_img($nombre, $numero, $descripcion, $localizacion, $unidades, $procedencia, $motivo_bj, $fecha_bj, $img){
 
-        
     	require "./conexion.php";
 
         try {
@@ -27,10 +26,10 @@
         }
     }
     
-    function actualizarDatos($nombre, $descripcion, $localizacion, $motivo_bj, $numero, $unidades, $fecha_bj, $img, $codigo){
+    function actualizarDatos($nombre, $descripcion, $localizacion, $motivo_bj, $numero, $unidades, $fecha_bj, $img, $codigo, $procedencia, $departamento){
         require "./conexion.php";
         $db = new PDO($conexion, $usuario, $contrasena);
-        $updateQuery = $db->prepare("UPDATE articulo SET NOMBRE = ?, NUM_SERIE = ?, DESCRIPCION = ?, LOCALIZACION = ?, MOTIVO_BAJA = ?, UNIDADES = ?, FECHA_BAJA = ?, RUTA_IMAGEN = ? WHERE CODIGO = ?;");
+        $updateQuery = $db->prepare("UPDATE articulo SET NOMBRE = ?, NUM_SERIE = ?, DESCRIPCION = ?, LOCALIZACION = ?, MOTIVO_BAJA = ?, UNIDADES = ?, FECHA_BAJA = ?, RUTA_IMAGEN = ?, PROCEDENCIA_ENTRADA = ?,  WHERE CODIGO = ?;");
         $updateQuery->bindParam(1, $nombre);
         $updateQuery->bindParam(2, $numero);
         $updateQuery->bindParam(3, $descripcion);
@@ -39,14 +38,25 @@
         $updateQuery->bindParam(6, $unidades);
         $updateQuery->bindParam(7, $fecha_bj);
         $updateQuery->bindParam(8, $img, PDO::PARAM_LOB);
-        $updateQuery->bindParam(9, $codigo);
+        $updateQuery->bindParam(9, $procedencia);
+        $updateQuery->bindParam(10, $codigo);
         $updateQuery->execute();
+
+        $queryDepartamento = $db->prepare("select * from DEPARTAMENTO where NOMBRE = ?");
+        $queryDepartamento->execute(array($departamento));
+
+        foreach ($queryDepartamento as $codigoDept) {
+            $updateDepartamento = $db->prepare("UPDATE tiene SET COD_DEPARTAMENTO = ? WHERE COD_ARTICULO = ?");
+            $updateDepartamento->bindParam(1, $codigoDept['codigo']);
+            $updateDepartamento->bindParam(2, $codigo);
+            $updateDepartamento->execute();
+        }
     }
 
-    function actualizarDatos2($nombre, $descripcion, $localizacion, $motivo_bj, $numero, $unidades, $fecha_bj, $codigo){
+    function actualizarDatos2($nombre, $descripcion, $localizacion, $motivo_bj, $numero, $unidades, $fecha_bj, $codigo, $procedencia, $departamento){
         require "./conexion.php";
         $db = new PDO($conexion, $usuario, $contrasena);
-        $updateQuery = $db->prepare("UPDATE articulo SET NOMBRE = ?, NUM_SERIE = ?, DESCRIPCION = ?, LOCALIZACION = ?, MOTIVO_BAJA = ?, UNIDADES = ?, FECHA_BAJA = ? WHERE CODIGO = ?;");
+        $updateQuery = $db->prepare("UPDATE articulo SET NOMBRE = ?, NUM_SERIE = ?, DESCRIPCION = ?, LOCALIZACION = ?, MOTIVO_BAJA = ?, UNIDADES = ?, FECHA_BAJA = ?, PROCEDENCIA_ENTRADA = ? WHERE CODIGO = ?;");
         $updateQuery->bindParam(1, $nombre);
         $updateQuery->bindParam(2, $numero);
         $updateQuery->bindParam(3, $descripcion);
@@ -54,26 +64,34 @@
         $updateQuery->bindParam(5, $motivo_bj);
         $updateQuery->bindParam(6, $unidades);
         $updateQuery->bindParam(7, $fecha_bj);
-        $updateQuery->bindParam(8, $codigo);
+        $updateQuery->bindParam(8, $procedencia);
+        $updateQuery->bindParam(9, $codigo);
         $updateQuery->execute();
+
+        $queryDepartamento = $db->prepare("select * from DEPARTAMENTO where NOMBRE = ?");
+        $queryDepartamento->execute(array($departamento));
+
+        foreach ($queryDepartamento as $codigoDept) {
+            $updateDepartamento = $db->prepare("UPDATE tiene SET COD_DEPARTAMENTO = ? WHERE COD_ARTICULO = ?");
+            $updateDepartamento->bindParam(1, $codigoDept['codigo']);
+            $updateDepartamento->bindParam(2, $codigo);
+            $updateDepartamento->execute();
+        }
     }
 
     function consultarDatos($consulta,$numeroPagina=0){
         require "./conexion.php";
         try {
             $db = new PDO($conexion, $usuario, $contrasena);
-    
-            
+        
             $itemsPagina = 10;
             $consultaFinal=$consulta. ' LIMIT '.$itemsPagina.' OFFSET ' . $numeroPagina * $itemsPagina;
            
-
             // $sql = "SELECT * FROM articulo;";
             //Preparo la consulta
             $preparada = $db->prepare($consultaFinal);
             $preparada->execute();
             
-
             /*Utilizamos el método fetchAll() para obtener todos los
             resultados de la consulta como un arreglo. 
             Después, se recorre el arreglo utilizando el foreach
@@ -265,7 +283,6 @@
             return FALSE;
         }
     }
-
 ?>
 
 
